@@ -48,16 +48,13 @@ function MontaOResto()
             local Fuuds = config.meuplot:WaitForChild("Int_Pickups"):GetChildren()
             if(#Fuuds>0)then
                 for i=1,#Fuuds do
+                    print(Fuuds[1]:GetChildren()[1]:GetChildren()[1]:FullName())
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[1].CFrame
                 end
             end
         end
     end)
-    
-    
-    
-    
-    
+
     function MudaVelocidade(q)
         if(q==1)then game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16 end
         if(q==2)then game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 30 end
