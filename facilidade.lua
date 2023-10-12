@@ -49,7 +49,7 @@ function MontaOResto()
             if(#Fuuds>0)then
                 for i=1,#Fuuds do
                     print(Fuuds[1]:GetChildren()[1]:GetChildren()[1]:FullName())
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[1].CFrame
+                    -- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[1].CFrame
                 end
             end
         end
