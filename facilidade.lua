@@ -72,12 +72,12 @@ function MontaOResto()
             MudaVelocidade(value)
         end
     }
-    -- Inicio:Button{
-    --     Name = "Fechar UI",
-    --     callback = function()
-    --         KillMe()
-    --     end
-    -- }
+    Inicio:Button{
+        Name = "Fechasssssssr UI",
+        callback = function()
+            KillMe()
+        end
+    }
     Inicio:Button{
         Name = "Dex",
         callback = function()
@@ -99,4 +99,3 @@ function PegaPlot()
         end
     end
 end
-
