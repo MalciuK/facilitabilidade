@@ -18,7 +18,7 @@ local Window = Library:Load({
     name = "Super Hack do Niquinistiquiniquis",
     sizeX = 425,
     sizeY = 165,
-    color = Color3.fromRGB(200, 1, 200)
+    color = Color3.fromRGB(255, 255, 255)
 })
 function  KillMe()
     Window:Hide()
@@ -45,29 +45,10 @@ function MontaOResto()
     
     game:GetService("RunService").RenderStepped:Connect(function()
         if(config.feed)then
-            local Plots = game.Workspace.Plots:GetChildren()
-            for i=1,#Plots do
-                local CoaisProts = Plots[i]:GetChildren()
-                for j=1,#CoaisProts do
-                    if(CoaisProts[j].Name == "Plot")then  
-                        local PastaFode = CoaisProts[j]:GetChildren()
-                        for k=1,#PastaFode do
-                            if(PastaFode[k].Name == "Int_Pickups")then
-                                local asfode = PastaFode[k]:GetChildren()
-                                if(#asfode>0)then
-                                    for l=1,#asfode do
-                                        local miasfode = asfode[l]:GetChildren()
-                                        if(#miasfode>0)then
-                                            local XUxa = miasfode[1]:GetChildren()
-                                            for m=1,#XUxa do
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = XUxa[m].CFrame
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
+            local Fuuds = config.meuplot:WaitForChild("Int_Pickups"):GetChildren()
+            if(#Fuuds>0)then
+                for i=1,#Fuuds do
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1].CFrame
                 end
             end
         end
@@ -108,7 +89,7 @@ function PegaPlot()
         local oiascumida = osplot[i]:WaitForChild("Plot"):WaitForChild("Int_Pickups"):GetChildren()
         if(#oiascumida>0) then
             if(#oiascumida[1]:GetChildren()>0)then
-                config.meuplot = osplot[i]
+                config.meuplot = osplot[i]:WaitForChild("Plot")
                 pair:Hide()
                 MontaOResto()
             end
