@@ -48,7 +48,7 @@ function MontaOResto()
             local Fuuds = config.meuplot:WaitForChild("Int_Pickups"):GetChildren()
             if(#Fuuds>0)then
                 for i=1,#Fuuds do
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1].CFrame
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[1].CFrame
                 end
             end
         end
