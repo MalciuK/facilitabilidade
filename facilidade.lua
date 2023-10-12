@@ -78,6 +78,12 @@ function MontaOResto()
             KillMe()
         end
     }
+    Inicio:Button{
+        Name = "Dex",
+        callback = function()
+            loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
+        end
+    }
 end
 
 function PegaPlot()
