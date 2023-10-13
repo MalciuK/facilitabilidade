@@ -29,6 +29,9 @@ local Window = Library:Load({
     sizeY = 165,
     color = Color3.fromRGB(255, 255, 255)
 })
+function  KillMe()
+    Window:Hide()
+end
 
 local Tab = Window:Tab("Cat Feeding Simulator")
 local Inicio = Tab:Section { name = "Inicio"}
@@ -161,7 +164,7 @@ function MontaOResto()
                                 if(#Obodao:GetChildren()>1)then
                                     print(Obodao.Name)
                                     local pressiona = Obodao.Presser
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pressiona.CFrame
+                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,pressiona,0)
                                 end
                                 if(osbuto[i].Name == "Rebirth")then
                                     Rebirtouuu()
