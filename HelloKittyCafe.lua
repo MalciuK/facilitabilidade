@@ -25,6 +25,9 @@ local Window = Library:Load({
     sizeY = 165,
     color = Color3.fromRGB(255, 255, 255)
 })
+function  KillMe()
+    Window:Hide()
+end
 
 local Tab = Window:Tab("Cafezinho Reloquiti")
 local Inicio = Tab:Section { name = "Inicio"} 
@@ -396,5 +399,14 @@ Inicio:Slider{
     Flag = "walkspeed",
     callback = function(value)
         MudaVelocidade(value)
+    end
+}
+
+Inicio:Button{
+    Name = "Fechar UI",
+    callback = function()
+        config.autowork=false
+        config.autochest=false
+        KillMe()
     end
 }
