@@ -79,6 +79,7 @@ function MontaOResto()
 
                 function ArrumaValores(buto1, buto2)
                     local valorstr1 = buto1:WaitForChild("Price").Text
+                    if(valorstr1=="FREE")then valorstr1 = "$0" end
                     local Modnum1 = string.sub(valorstr1,#valorstr1,#valorstr1)
                     local valornum1 = nil
                     if(Modnum1=="K")then
@@ -92,7 +93,7 @@ function MontaOResto()
                     end
 
                     local valorstr2 = buto2:WaitForChild("Price").Text
-                    print(valorstr1,valorstr2)
+                    if(valorstr2=="FREE")then valorstr2 = "$0" end
                     local Modnum2 = string.sub(valorstr2,#valorstr2,#valorstr2)
                     local valornum2 = nil
                     if(Modnum2=="K")then
@@ -128,7 +129,7 @@ function MontaOResto()
                             end
                             -- print(meumanevalornum,valornum)
 
-                            if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food" or osbuto[i].Name == "Free Food")then
+                            if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food")then
                                 print("Comprando:",osbuto[i])
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
