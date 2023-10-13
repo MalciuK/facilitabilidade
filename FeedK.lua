@@ -130,7 +130,7 @@ function MontaOResto()
                             end
                             -- print(meumanevalornum,valornum)
 
-                            if(meumanevalornum>=valornum or osbuto[i].Name == "asd")then
+                            if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food")then
                                 print("Comprando:",osbuto[i])
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
