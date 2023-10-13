@@ -92,6 +92,7 @@ function MontaOResto()
                     end
 
                     local valorstr2 = buto2:WaitForChild("Price").Text
+                    print(valorstr1,valorstr2)
                     local Modnum2 = string.sub(valorstr2,#valorstr2,#valorstr2)
                     local valornum2 = nil
                     if(Modnum2=="K")then
