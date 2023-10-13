@@ -59,7 +59,7 @@ function MontaOResto()
     config.rebirtano = false
 
     game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
+        -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
         if(config.feed)then
             local Fuuds = config.meuplot.Int_Pickups:GetChildren()
             if(#Fuuds>0 or config.entregou)then
