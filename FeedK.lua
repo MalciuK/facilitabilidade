@@ -16,6 +16,7 @@ function TerminaCom(astring,pedaco)
 end
 local config = {
     meuplot = nil,
+    meuchao = nil,
     feed = false
 }
 print((tonumber("3")), tonumber("3.2"))
@@ -55,17 +56,27 @@ function MontaOResto()
             -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
             local Fuuds = config.meuplot.Int_Pickups:GetChildren()
             if(#Fuuds>0)then
+                local concerta = CFrame.new(Vector3.new(config.meuchao.CFrame.x,config.meuchao.CFrame.y+3,config.meuchao.CFrame.z))
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = concerta
                 for i=1,#Fuuds do
-                    if(#Fuuds[1]:GetChildren()>0) then
-                        function ArrumaValoresAltura(pocote1, pocote2)
-                            local valornum1 = pocote1:GetChildren()[1]:GetChildren()[#pocote1:GetChildren()[1]:GetChildren()].CFrame.y
-                            local valornum2 = pocote2:GetChildren()[1]:GetChildren()[#pocote2:GetChildren()[1]:GetChildren()].CFrame.y
-                            return valornum1 < valornum2
+                    if(#Fuuds[i]:GetChildren()>0) then
+                        local xuxa = Fuuds[i]:GetChildren()[1]:GetChildren()
+                        for j=1,#xuxa do
+                            xuxa[j].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                         end
-                        table.sort(Fuuds, ArrumaValoresAltura)
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[#Fuuds[1]:GetChildren()[1]:GetChildren()].CFrame
                     end
                 end
+                -- for i=1,#Fuuds do
+                --     if(#Fuuds[1]:GetChildren()>0) then
+                --         function ArrumaValoresAltura(pocote1, pocote2)
+                --             local valornum1 = pocote1:GetChildren()[1]:GetChildren()[#pocote1:GetChildren()[1]:GetChildren()].CFrame.y
+                --             local valornum2 = pocote2:GetChildren()[1]:GetChildren()[#pocote2:GetChildren()[1]:GetChildren()].CFrame.y
+                --             return valornum1 < valornum2
+                --         end
+                --         table.sort(Fuuds, ArrumaValoresAltura)
+                --         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[#Fuuds[1]:GetChildren()[1]:GetChildren()].CFrame
+                --     end
+                -- end
             else
                 local meumanevalorstr = game.Players.LocalPlayer.PlayerGui.MainHud.TopHud.Money.Title.Text
                 local meumaneModnum = string.sub(meumanevalorstr,#meumanevalorstr,#meumanevalorstr)
@@ -194,6 +205,12 @@ function PegaPlot()
                 print(oiugatu)
                 if not(oiugatu=="C/:") then
                     config.meuplot = osplot[i].Plot
+                    local cassachao = config.meuplot.Decor:WaitForChild("Andar 1"):GetChildren()[2]:GetChildren()
+                    for k=1,#cassachao do
+                        if(cassachao[k].CFrame.y<8.20000 and cassachao[k].CFrame.y>8.19998)then
+                            config.meuchao = cassachao[k]
+                        end
+                    end
                     pair:Hide()
                     game.Players.LocalPlayer.PlayerGui.MainHud.Boards:WaitForChild("Insert Food").Price.Text = "$0"
                     MontaOResto()
