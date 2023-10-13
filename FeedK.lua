@@ -57,6 +57,12 @@ function MontaOResto()
             if(#Fuuds>0)then
                 for i=1,#Fuuds do
                     if(#Fuuds[1]:GetChildren()>0) then
+                        function ArrumaValoresAltura(pocote1, pocote2)
+                            local valornum1 = pocote1:GetChildren()[1]:GetChildren()[#pocote1:GetChildren()[1]:GetChildren()].CFrame.y
+                            local valornum2 = pocote2:GetChildren()[1]:GetChildren()[#pocote2:GetChildren()[1]:GetChildren()].CFrame.y
+                            return valornum1 < valornum2
+                        end
+                        table.sort(Fuuds, ArrumaValoresAltura)
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Fuuds[1]:GetChildren()[1]:GetChildren()[#Fuuds[1]:GetChildren()[1]:GetChildren()].CFrame
                     end
                 end
@@ -77,7 +83,7 @@ function MontaOResto()
 
                 local osbuto = game.Players.LocalPlayer.PlayerGui.MainHud.Boards:GetChildren()
 
-                function ArrumaValores(buto1, buto2)
+                function ArrumaValoresPrice(buto1, buto2)
                     local valorstr1 = buto1:WaitForChild("Price").Text
                     if(valorstr1=="FREE")then valorstr1 = "$0" end
                     local Modnum1 = string.sub(valorstr1,#valorstr1,#valorstr1)
@@ -109,7 +115,7 @@ function MontaOResto()
                     return valornum1 < valornum2
                 end
 
-                table.sort(osbuto, ArrumaValores)
+                table.sort(osbuto, ArrumaValoresPrice)
 
                 for i=1,#osbuto do
                     if(StartaCom(osbuto[i].Name,"[GAMEPASS]") or StartaCom(osbuto[i].Name,"VIP")) then
