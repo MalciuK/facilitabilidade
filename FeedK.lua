@@ -116,6 +116,7 @@ function MontaOResto()
                     else
                         if(StartaCom(osbuto[i].Name,"Rebirth") or TerminaCom(osbuto[i].Name,"Meal") or TerminaCom(osbuto[i].Name,"Biscuit") or TerminaCom(osbuto[i].Name,"Food") or StartaCom(osbuto[i].Name,"Upgrade Speed")) then
                             local valorstr = osbuto[i]:WaitForChild("Price").Text
+                            if(valorstr=="FREE")then valorstr = "$0" end
                             local Modnum = string.sub(valorstr,#valorstr,#valorstr)
                             local valornum = nil
                             if(Modnum=="K")then
