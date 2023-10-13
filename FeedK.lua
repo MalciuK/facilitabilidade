@@ -130,15 +130,13 @@ function MontaOResto()
                             end
                             -- print(meumanevalornum,valornum)
 
-                            if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food")then
+                            if(meumanevalornum>=valornum or osbuto[i].Name == "asd")then
                                 print("Comprando:",osbuto[i])
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                                    print(Obodao.Name)
                                     local pressiona = Obodao.Presser
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pressiona.CFrame
-                                    -- firetouchinterest(game.Players.LocalPlayer.Character.LeftFoot,pressiona,0)
-                                    -- firetouchinterest(game.Players.LocalPlayer.Character.Head,pressiona,1)
                                 end
                             end
                         end
