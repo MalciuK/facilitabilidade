@@ -131,9 +131,10 @@ function MontaOResto()
                             -- print(meumanevalornum,valornum)
 
                             if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food")then
+                                print("Comprando:",osbuto[i])
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
-                                    print("Comprando:",osbuto[i])
+                                    print(Obodao.Name)
                                     local pressiona = Obodao.Presser
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pressiona.CFrame
                                 end
@@ -188,6 +189,7 @@ function PegaPlot()
                 if not(oiugatu=="C/:") then
                     config.meuplot = osplot[i].Plot
                     pair:Hide()
+                    game.Players.LocalPlayer.PlayerGui.MainHud.Boards:WaitForChild("Insert Food").Price.Text = "$0"
                     MontaOResto()
                 end
             end
