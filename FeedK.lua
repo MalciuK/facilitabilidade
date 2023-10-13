@@ -41,9 +41,13 @@ local pair = Inicio:Button{
         PegaPlot()
     end
 }
+local SliderSpeed = {}
+local FeedToggle = {}
+local KillUIButton = {}
+local DexButton = {}
 
 function MontaOResto()
-    Inicio:Toggle{
+    FeedToggle = Inicio:Toggle{
         Name="Auto Feed Gatin",
         flag="autofeed",
         callback=function(q)
@@ -159,6 +163,9 @@ function MontaOResto()
                                     local pressiona = Obodao.Presser
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pressiona.CFrame
                                 end
+                                if(osbuto[i].Name == "Rebirth")then
+                                    Rebirtouuu()
+                                end
                             end
                         end
                     end
@@ -173,7 +180,7 @@ function MontaOResto()
         if(q==3)then game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 60 end
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16*q
     end
-    Inicio:Slider{
+    SliderSpeed = Inicio:Slider{
         Name = "Velocidade",
         Default = 1,
         Min = 1,
@@ -184,14 +191,14 @@ function MontaOResto()
             MudaVelocidade(value)
         end
     }
-    Inicio:Button{
+    KillUIButton = Inicio:Button{
         Name = "Fechar UI",
         callback = function()
             config.feed=false
             KillMe()
         end
     }
-    Inicio:Button{
+    DexButton = Inicio:Button{
         Name = "Dex",
         callback = function()
             loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
@@ -215,11 +222,21 @@ function PegaPlot()
                             config.meuchao = cassachao[k]
                         end
                     end
-                    pair:Hide()
+                    if not(pair == nil) then
+                        pair:Hide()     
+                    end
                     game.Players.LocalPlayer.PlayerGui.MainHud.Boards:WaitForChild("Insert Food").Price.Text = "$0"
                     MontaOResto()
                 end
             end
         end
     end
+end
+
+function Rebirtouuu()
+    SliderSpeed:Hide()
+    FeedToggle:Hide()
+    KillUIButton:Hide()
+    DexButton:Hide()
+    PegaPlot()
 end
