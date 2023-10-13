@@ -59,9 +59,8 @@ function MontaOResto()
     config.rebirtano = false
 
     game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
+        -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
         if(config.feed)then
-            -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
             local Fuuds = config.meuplot.Int_Pickups:GetChildren()
             if(#Fuuds>0 or config.entregou)then
                 local concerta = CFrame.new(Vector3.new(config.meuchao.CFrame.x,config.meuchao.CFrame.y+3,config.meuchao.CFrame.z))
@@ -162,6 +161,7 @@ function MontaOResto()
                                 end
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
                                     print(Obodao.Name)
                                     local pressiona = Obodao.Presser
                                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,pressiona,0)
