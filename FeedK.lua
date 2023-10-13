@@ -35,6 +35,13 @@ end
 local Tab = Window:Tab("Cat Feeding Simulator")
 local Inicio = Tab:Section { name = "Inicio"}
 
+local reb = Inicio:Button{
+    Name="Rebirtar teste",
+    callback=function()
+        reb:Hide()
+        Rebirtouuu()
+    end
+}
 local pair = Inicio:Button{
     Name="Atualiza Plot",
     callback=function()
