@@ -59,7 +59,7 @@ function MontaOResto()
     config.rebirtano = false
 
     game:GetService("RunService").RenderStepped:Connect(function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
+        -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
         if(config.feed)then
             -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
             local Fuuds = config.meuplot.Int_Pickups:GetChildren()
@@ -165,6 +165,7 @@ function MontaOResto()
                                     print(Obodao.Name)
                                     local pressiona = Obodao.Presser
                                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,pressiona,0)
+                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,pressiona,1)
                                 end
                                 if(osbuto[i].Name == "Rebirth")then
                                     Rebirtouuu()
