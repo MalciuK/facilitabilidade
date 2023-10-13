@@ -38,7 +38,6 @@ local Inicio = Tab:Section { name = "Inicio"}
 local reb = Inicio:Button{
     Name="Rebirtar teste",
     callback=function()
-        reb:Hide()
         Rebirtouuu()
     end
 }
@@ -241,6 +240,10 @@ function PegaPlot()
 end
 
 function Rebirtouuu()
+    if not(reb==nil) then
+        reb:Hide()
+        reb = nil
+    end
     SliderSpeed:Hide()
     FeedToggle:Hide()
     KillUIButton:Hide()
