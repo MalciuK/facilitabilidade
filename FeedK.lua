@@ -16,6 +16,7 @@ function TerminaCom(astring,pedaco)
 end
 local config = {
     meuplot = nil,
+    rebirtano = false,
     meuchao = nil,
     entregou = false,
     feed = false
@@ -60,6 +61,8 @@ function MontaOResto()
             config.feed = q
         end
     }
+    config.feed = config.rebirtano
+    config.rebirtano = false
 
     game:GetService("RunService").RenderStepped:Connect(function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
@@ -240,6 +243,7 @@ function PegaPlot()
 end
 
 function Rebirtouuu()
+    config.rebirtano = true
     if not(reb==nil) then
         reb:Hide()
         reb = nil
