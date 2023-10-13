@@ -17,6 +17,7 @@ end
 local config = {
     meuplot = nil,
     meuchao = nil,
+    entregou = false,
     feed = false
 }
 print((tonumber("3")), tonumber("3.2"))
@@ -55,13 +56,14 @@ function MontaOResto()
         if(config.feed)then
             -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
             local Fuuds = config.meuplot.Int_Pickups:GetChildren()
-            if(#Fuuds>0)then
+            if(#Fuuds>0 or config.entregou)then
                 local concerta = CFrame.new(Vector3.new(config.meuchao.CFrame.x,config.meuchao.CFrame.y+3,config.meuchao.CFrame.z))
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = concerta
                 for i=1,#Fuuds do
                     if(#Fuuds[i]:GetChildren()>0) then
                         local xuxa = Fuuds[i]:GetChildren()[1]:GetChildren()
                         for j=1,#xuxa do
+                            config.entregou = false
                             xuxa[j].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                         end
                     end
@@ -148,7 +150,9 @@ function MontaOResto()
                             -- print(meumanevalornum,valornum)
 
                             if(meumanevalornum>=valornum or osbuto[i].Name == "Insert Food")then
-                                print("Comprando:",osbuto[i])
+                                if(osbuto[i].Name == "Insert Food")then
+                                    config.entregou = true
+                                end
                                 local Obodao = config.meuplot:WaitForChild("Buttons"):WaitForChild(osbuto[i].Name)
                                 if(#Obodao:GetChildren()>1)then
                                     print(Obodao.Name)
