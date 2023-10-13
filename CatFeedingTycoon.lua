@@ -29,19 +29,10 @@ local Window = Library:Load({
     sizeY = 165,
     color = Color3.fromRGB(255, 255, 255)
 })
-function  KillMe()
-    Window:Hide()
-end
 
 local Tab = Window:Tab("Cat Feeding Simulator")
 local Inicio = Tab:Section { name = "Inicio"}
 
-local reb = Inicio:Button{
-    Name="Rebirtar teste",
-    callback=function()
-        Rebirtouuu()
-    end
-}
 local pair = Inicio:Button{
     Name="Atualiza Plot",
     callback=function()
@@ -235,6 +226,7 @@ function PegaPlot()
                         pair:Hide()     
                     end
                     game.Players.LocalPlayer.PlayerGui.MainHud.Boards:WaitForChild("Insert Food").Price.Text = "$0"
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,game.Workspace.Obby.ObbyFinish,0)
                     MontaOResto()
                 end
             end
