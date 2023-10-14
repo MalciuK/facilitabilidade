@@ -15,7 +15,8 @@ local config = {
     travad = true,
     praqdelai = nil,
     autowork = false,
-    autochest = false
+    autochest = false,
+    pushabolo = false
 }
 
 local Library = initLibrary()
@@ -369,6 +370,13 @@ if(Cafe)then
     end)
 end
 if(Kuromi)then
+    Inicio:Toggle{
+        Name = "Salvar Bolinhos",
+        flag =" praqisso mds",
+        callback = function(oq)
+            config.pushabolo=oq
+        end
+    }
     Inicio:Button{
         Name = "Doces Kuromii",
         callback = function()
@@ -382,6 +390,17 @@ if(Kuromi)then
             osdoce[i]:GetChildren()[1].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         end
     end
+    
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if(config.pushabolo)then
+            for i=1,#game.Players:GetChildren() do
+                if(game.Players:GetChildren()[i].Character.Humanoid.Speed==6) then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=true
+                    game.Players:GetChildren()[i].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end)
 end
 
 function MudaVelocidade(q)
