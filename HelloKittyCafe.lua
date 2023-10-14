@@ -394,7 +394,7 @@ if(Kuromi)then
     game:GetService("RunService").RenderStepped:Connect(function()
         if(config.pushabolo)then
             for i=1,#game.Players:GetChildren() do
-                if(game.Players:GetChildren()[i].Character.Humanoid.Speed==6) then
+                if(game.Players:GetChildren()[i].Character.Humanoid.WalkSpeed==6 and game.Players:GetChildren()[i] ~= game.Players.LocalPlayer) then
                     game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=true
                     game.Players:GetChildren()[i].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                 end
