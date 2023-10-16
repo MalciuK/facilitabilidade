@@ -12,14 +12,14 @@ end
 local config = {
     esperarbaus = false,
     delai = 0,
-    delaimax = 40,
     travad = true,
     praqdelai = nil,
     autowork = false,
     autochest = false,
     keroppi = false,
     transs = false,
-    winkeroppi = false
+    winkeroppi = false,
+    doceku = false
 }
 
 local Library = initLibrary()
@@ -378,17 +378,10 @@ if(Cafe)then
 end
 if(Kuromi)then
     Inicio:Toggle{
-        Name = "Salvar Bolinhos",
-        flag =" praqisso mds",
-        callback = function(oq)
-            config.transs=oq
-            Transparecer(game.Workspace.DengDaiQu:GetChildren())
-        end
-    }
-    Inicio:Button{
         Name = "Doces Kuromii",
-        callback = function()
-            Pushadoce()
+        flag ="dk",
+        callback = function(oq)
+            config.doceku = oq
         end
     }
 
@@ -398,62 +391,37 @@ if(Kuromi)then
             osdoce[i]:GetChildren()[1].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         end
     end
-    function Transparecer(coisas)
-        if(config.transs) then
-            uq = 0.9
-        else
-            uq = 0
+    
+    game:GetService("RunService").RenderStepped:Connect(function() 
+        if(config.doceku)then
+            Pushadoce()
         end
-        for i=1,#coisas do
-            if(coisas[i]:GetChildren())then
-                Transparecer(coisas[i])
-            end
-            if(coisas[i].ClassName == "MeshPart" or coisas[i].ClassName == "Part")then
-                coisas[i].Transparency = uq
-            end
-        end
-    end
+    end)
+    -- Inicio:Toggle{
+    --     Name = "Salvar Bolinhos",
+    --     flag =" praqisso mds",
+    --     callback = function(oq)
+    --         config.transs=oq
+    --         Transparecer(game.Workspace.DengDaiQu:GetChildren())
+    --     end
+    -- }
+    -- function Transparecer(coisas)
+    --     if(config.transs) then
+    --         uq = 0.9
+    --     else
+    --         uq = 0
+    --     end
+    --     for i=1,#coisas do
+    --         if(coisas[i]:GetChildren())then
+    --             Transparecer(coisas[i])
+    --         end
+    --         if(coisas[i].ClassName == "MeshPart" or coisas[i].ClassName == "Part")then
+    --             coisas[i].Transparency = uq
+    --         end
+    --     end
+    -- end
 end
 if(Keroppi)then
-    -- function Aoba()
-    --     -- local osbapa = game.Workspace:GetChildren()
-    --     -- for i=1,#osbapa do
-    --     --     if(osbapa[i].Name=="PlataformaBase")then
-    --     --         osbapa[i]:Destroy()
-    --     --     end
-    --     --     for j=1,#osbapa[i]:GetChildren() do
-    --     --         for k=1,#osbapa[i]:GetChildren()[j]:GetChildren() do
-    --     --             if(osbapa[i]:GetChildren()[j]:GetChildren()[k].Name == "Meshes/qidian_01")then
-    --     --                 local prechao = osbapa[i]:GetChildren()[j]:GetChildren()[k]
-    --     --                 print(prechao.CFrame)
-    --     --                 print(prechao.Size)
-
-    --     --                 local PlataformaBase = Instance.new("Part")
-    --     --                 PlataformaBase.Parent = game.Workspace
-    --     --                 PlataformaBase.Name = "PlataformaBase"        
-    --     --                 PlataformaBase.Anchored = true
-    --     --                 local posit = CFrame.new(prechao.CFrame.x,(prechao.CFrame.y+(prechao.Size.y/2))-7-30-20,prechao.CFrame.z)
-    --     --                 PlataformaBase.CFrame = posit
-    --     --                 PlataformaBase.Size = Vector3.new(40,1,40) 
-
-    --     --             end
-    --     --         end
-    --     --     end
-    --     -- end
-    -- end
-    -- Inicio:Button{
-    --     Name = "Ativar baguncinha",
-    --     callback = function()
-    --         Aoba()
-    --     end
-    -- }
-
-    -- Inicio:Button{
-    --     Name = "Ativar baguncinha",
-    --     callback = function()
-    --         Aoba()
-    --     end
-    -- }
     Inicio:Toggle{
         Name = "AutoWin",
         flag = "asd",
@@ -499,29 +467,6 @@ if(Keroppi)then
             end
         end
     end)
-
-    -- local Recicla = {}
-    -- local delayb = 500
-    -- game:GetService("RunService").RenderStepped:Connect(function() 
-    --     for i=1,#Recicla do
-    --         if(Recicla[i][1]>1)then
-    --             Recicla[i][2]:Destroy()
-    --         else
-    --             Recicla[i][1] -= 1
-    --         end 
-    --     end
-    --     if(config.keroppi)then
-    --         local PlataformaBase = Instance.new("Part")
-    --         PlataformaBase.Parent = game.Workspace
-    --         PlataformaBase.Name = "PlataformaBase"        
-    --         PlataformaBase.Anchored = true
-    --         local posit = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.x,0,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.z)
-    --         PlataformaBase.CFrame = posit
-    --         PlataformaBase.Size = Vector3.new(40,1,40) 
-    --         table.insert(Recicla,{delayb,PlataformaBase})
-    --     end
-    -- end)
-    
 end
 
 function MudaVelocidade(q)
