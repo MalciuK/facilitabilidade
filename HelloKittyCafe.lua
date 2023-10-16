@@ -1,3 +1,4 @@
+local ContextActionService = game:GetService("ContextActionService")
 loadstring(game:HttpGet('https://raw.githubusercontent.com/1uaxx/yunv2/main/librarysource.lua'))()
 local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
 function GetObject(Astring)
@@ -475,22 +476,26 @@ if(Keroppi)then
     end
 
     game:GetService("RunService").RenderStepped:Connect(function()
-        if(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y<=5 and game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y>=0 and config.winkeroppi)then
-            config.winkeroppi = false
-        end
+        -- if(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y<=5 and game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y>=0 and config.winkeroppi)then
+        --     config.winkeroppi = false
+        -- end
         if(config.keroppi)then
+            local reset = true
             for i=1,#game.Players:GetChildren() do
-                if(game.Players:GetChildren()[i].Name~="Nixtiscript")then
-                    for j=1,#osbaparr do
-                        local dist = (osbaparr[j].Position-game.Players:GetChildren()[i].Character.HumanoidRootPart.Position).magnitude
-                        print(game.Players:GetChildren()[i].Name,dist)
-                        if(dist <= 130 and not config.winkeroppi)then
+                for j=1,#osbaparr do
+                    local dist = (osbaparr[j].Position-game.Players:GetChildren()[i].Character.HumanoidRootPart.Position).magnitude
+                    if(dist <= 130)then
+                        reset = false
+                        if not(config.winkeroppi) then
                             config.winkeroppi = true
                             local concerta = CFrame.new(osbaparr[j].CFrame.x,osbaparr[j].CFrame.y+5,osbaparr[j].CFrame.z)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = concerta
                         end
                     end
                 end
+            end
+            if(reset)then
+                config.winkeroppi = false
             end
         end
     end)
