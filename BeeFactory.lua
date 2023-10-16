@@ -26,7 +26,7 @@ local config = {
 print((tonumber("3")), tonumber("3.2"))
 local Library = initLibrary()
 local Window = Library:Load({
-    name = "Super Hack do Niquinistiquiniquis",
+    name = "Super Hack do Niquinistiquiniquis pro Krotoo",
     sizeX = 425,
     sizeY = 165,
     color = Color3.fromRGB(255, 255, 255)
