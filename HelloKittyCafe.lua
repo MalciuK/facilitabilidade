@@ -16,7 +16,9 @@ local config = {
     praqdelai = nil,
     autowork = false,
     autochest = false,
-    pushabolo = false
+    keroppi = false,
+    transs = false,
+    winkeroppi = false
 }
 
 local Library = initLibrary()
@@ -36,12 +38,16 @@ local Inicio = Tab:Section { name = "Inicio"}
 local OqMostrar = game.Workspace:GetChildren()
 local Cafe = false
 local Kuromi = false
+local Keroppi = false
 for i=1, #OqMostrar do
     if(OqMostrar[i].Name == "TreasureEntity") then
         Cafe=true
     end
     if(OqMostrar[i].Name == "MapItem") then
         Kuromi=true
+    end
+    if(OqMostrar[i].Name == "Machinery") then
+        Keroppi=true
     end
 end
 
@@ -374,7 +380,8 @@ if(Kuromi)then
         Name = "Salvar Bolinhos",
         flag =" praqisso mds",
         callback = function(oq)
-            config.pushabolo=oq
+            config.transs=oq
+            Transparecer(game.Workspace.DengDaiQu:GetChildren())
         end
     }
     Inicio:Button{
@@ -390,17 +397,126 @@ if(Kuromi)then
             osdoce[i]:GetChildren()[1].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         end
     end
+    function Transparecer(coisas)
+        if(config.transs) then
+            uq = 0.9
+        else
+            uq = 0
+        end
+        for i=1,#coisas do
+            if(coisas[i]:GetChildren())then
+                Transparecer(coisas[i])
+            end
+            if(coisas[i].ClassName == "MeshPart" or coisas[i].ClassName == "Part")then
+                coisas[i].Transparency = uq
+            end
+        end
+    end
+end
+if(Keroppi)then
+    -- function Aoba()
+    --     -- local osbapa = game.Workspace:GetChildren()
+    --     -- for i=1,#osbapa do
+    --     --     if(osbapa[i].Name=="PlataformaBase")then
+    --     --         osbapa[i]:Destroy()
+    --     --     end
+    --     --     for j=1,#osbapa[i]:GetChildren() do
+    --     --         for k=1,#osbapa[i]:GetChildren()[j]:GetChildren() do
+    --     --             if(osbapa[i]:GetChildren()[j]:GetChildren()[k].Name == "Meshes/qidian_01")then
+    --     --                 local prechao = osbapa[i]:GetChildren()[j]:GetChildren()[k]
+    --     --                 print(prechao.CFrame)
+    --     --                 print(prechao.Size)
+
+    --     --                 local PlataformaBase = Instance.new("Part")
+    --     --                 PlataformaBase.Parent = game.Workspace
+    --     --                 PlataformaBase.Name = "PlataformaBase"        
+    --     --                 PlataformaBase.Anchored = true
+    --     --                 local posit = CFrame.new(prechao.CFrame.x,(prechao.CFrame.y+(prechao.Size.y/2))-7-30-20,prechao.CFrame.z)
+    --     --                 PlataformaBase.CFrame = posit
+    --     --                 PlataformaBase.Size = Vector3.new(40,1,40) 
+
+    --     --             end
+    --     --         end
+    --     --     end
+    --     -- end
+    -- end
+    -- Inicio:Button{
+    --     Name = "Ativar baguncinha",
+    --     callback = function()
+    --         Aoba()
+    --     end
+    -- }
+
+    -- Inicio:Button{
+    --     Name = "Ativar baguncinha",
+    --     callback = function()
+    --         Aoba()
+    --     end
+    -- }
+    Inicio:Toggle{
+        Name = "AutoWin",
+        flag = "asd",
+        callback = function(oq)
+            config.keroppi = oq
+        end
+    }
     
+    local osbaparr = {}
+    local osbapa = game.Workspace:GetChildren()
+    for i=1,#osbapa do
+        for j=1,#osbapa[i]:GetChildren() do
+            for k=1,#osbapa[i]:GetChildren()[j]:GetChildren() do
+                if(osbapa[i]:GetChildren()[j]:GetChildren()[k].Name == "ZS WAI DiaoXiang Keroppi YunDong 002")then
+                    print("Kerorrola")
+                    table.insert(osbaparr,osbapa[i]:GetChildren()[j]:GetChildren()[k].Root)
+                end
+            end
+        end
+    end
+
     game:GetService("RunService").RenderStepped:Connect(function()
-        if(config.pushabolo)then
+        if(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y<=5 and game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y>=0 and config.winkeroppi)then
+            config.winkeroppi = false
+        end
+        if(config.keroppi)then
             for i=1,#game.Players:GetChildren() do
-                if(game.Players:GetChildren()[i].Character.Humanoid.WalkSpeed==6 and game.Players:GetChildren()[i] ~= game.Players.LocalPlayer) then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored=false
-                    game.Players:GetChildren()[i].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                if(game.Players:GetChildren()[i].Name~="Nixtiscript")then
+                    for j=1,#osbaparr do
+                        local dist = (osbaparr[j].Position-game.Players:GetChildren()[i].Character.HumanoidRootPart.Position).magnitude
+                        print(game.Players:GetChildren()[i].Name,dist)
+                        if(dist <= 130 and not config.winkeroppi)then
+                            config.winkeroppi = true
+                            local concerta = CFrame.new(osbaparr[j].CFrame.x,osbaparr[j].CFrame.y+5,osbaparr[j].CFrame.z)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = concerta
+                        end
+                    end
                 end
             end
         end
     end)
+
+    -- local Recicla = {}
+    -- local delayb = 500
+    -- game:GetService("RunService").RenderStepped:Connect(function() 
+    --     for i=1,#Recicla do
+    --         if(Recicla[i][1]>1)then
+    --             Recicla[i][2]:Destroy()
+    --         else
+    --             Recicla[i][1] -= 1
+    --         end 
+    --     end
+    --     if(config.keroppi)then
+    --         local PlataformaBase = Instance.new("Part")
+    --         PlataformaBase.Parent = game.Workspace
+    --         PlataformaBase.Name = "PlataformaBase"        
+    --         PlataformaBase.Anchored = true
+    --         local posit = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.x,0,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.z)
+    --         PlataformaBase.CFrame = posit
+    --         PlataformaBase.Size = Vector3.new(40,1,40) 
+    --         table.insert(Recicla,{delayb,PlataformaBase})
+    --     end
+    -- end)
+    
 end
 
 function MudaVelocidade(q)
@@ -426,6 +542,7 @@ Inicio:Button{
     callback = function()
         config.autowork=false
         config.autochest=false
+        config.keroppi=false
         KillMe()
     end
 }
