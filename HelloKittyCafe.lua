@@ -82,7 +82,7 @@ if(Cafe)then
         Title.Position = UDim2.new(0, 0, 0, 0)
         Title.Size = UDim2.new(0, Largura, 0, 25)
         Title.Font = Enum.Font.GothamSemibold
-        Title.Text = "Super Hack do Niquistiniquis"
+        Title.Text = "Super Hack do Niquistiniquis pra Cauany"
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
         Title.TextSize = 14.000
         Title.TextWrapped = true
@@ -565,7 +565,7 @@ if(Kuromi)then
         Title.Position = UDim2.new(0, 0, 0, 0)
         Title.Size = UDim2.new(0, Largura, 0, 25)
         Title.Font = Enum.Font.GothamSemibold
-        Title.Text = "Super Hack do Niquistiniquis"
+        Title.Text = "Super Hack do Niquistiniquis pra Cauany"
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
         Title.TextSize = 14.000
         Title.TextWrapped = true
@@ -758,7 +758,7 @@ if(Keroppi)then
         Title.Position = UDim2.new(0, 0, 0, 0)
         Title.Size = UDim2.new(0, Largura, 0, 25)
         Title.Font = Enum.Font.GothamSemibold
-        Title.Text = "Super Hack do Niquistiniquis"
+        Title.Text = "Super Hack do Niquistiniquis pra Cauany"
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
         Title.TextSize = 14.000
         Title.TextWrapped = true
