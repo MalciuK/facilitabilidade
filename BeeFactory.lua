@@ -21,12 +21,16 @@ local config = {
     maitaxa = false,
     afkdelay = 1000,
     mashupa = false,
-    antiafk = false
+    antiafk = false,
+    auto2xextra = false,
+    tonoobbi = false,
+    apertoalafodasse = false,
+    delai2xextra = 100,
+    delai2xextraloop = 0
 }
-print((tonumber("3")), tonumber("3.2"))
 
 game:GetService("RunService").RenderStepped:Connect(function()
-    if(config.antiafk)then
+    if(config.antiafk and config.tonoobbi==false)then
         if(config.afkdelay>0)then
             config.afkdelay -= 1
         else
@@ -34,52 +38,19 @@ game:GetService("RunService").RenderStepped:Connect(function()
             input.press(Enum.KeyCode.Space)
         end
     end
-    if(config.melzin)then
+    if(config.melzin and config.tonoobbi==false)then
         local osmel = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).Honey:GetChildren()
         for i=1,#osmel do
             osmel[i].Egg.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         end
     end
-    if(config.entregar)then
+    if(config.entregar and config.tonoobbi==false)then
         local deposito = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).Buttons.Sell
         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,deposito,0)
         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,deposito,1)
     end
-    if(config.upabieia)then
-        local uprecinstr = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).BillboardGuis.PurchaseBee.BillboardGui.Cost.Text
-        uprecinstr = uprecinstr:gsub("%,", "")
-        local Modnum = string.sub(uprecinstr,#uprecinstr,#uprecinstr)
-        local uprecinnum = nil
-        if(Modnum=="K")then
-            uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr-1))*1000
-        else
-            if(Modnum=="M") then
-                uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr-1))*1000000
-            else
-                uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr))
-            end
-        end
-
-        local mamanistr = game.Players.LocalPlayer.PlayerGui.ScreenGui.Frame.Coins.TextLabel.Text
-        mamanistr = mamanistr:gsub("%,", "")
-        Modnum = string.sub(mamanistr,#mamanistr,#mamanistr)
-        local mamaninum = nil
-        if(Modnum=="K")then
-            mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr-1))*1000
-        else
-            if(Modnum=="M") then
-                mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr-1))*1000000
-            else
-                mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr))
-            end
-        end
-        if(uprecinnum<=mamaninum)then
-            local UbutoPaPagah = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).Buttons.Purchase_Bee
-            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,0)
-            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,1)
-        end
-    end
-    if(config.maitaxa)then
+    local maiabeiaounn = false
+    if(config.maitaxa and config.tonoobbi==false)then
         local uprecinstr2 = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).BillboardGuis.SellPartText.BillboardGui.Amount.Text
         uprecinstr2 = uprecinstr2:gsub("%,", "")
         local Modnum = string.sub(uprecinstr2,#uprecinstr2,#uprecinstr2)
@@ -142,7 +113,44 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 local UbutoPaPagah = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).Buttons.Faster_Button
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,0)
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,1)
+            else
             end
+        else
+            maiabeiaounn = true
+        end
+    end
+    if(config.upabieia and maiabeiaounn)then
+        local uprecinstr = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).BillboardGuis.PurchaseBee.BillboardGui.Cost.Text
+        uprecinstr = uprecinstr:gsub("%,", "")
+        local Modnum = string.sub(uprecinstr,#uprecinstr,#uprecinstr)
+        local uprecinnum = nil
+        if(Modnum=="K")then
+            uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr-1))*1000
+        else
+            if(Modnum=="M") then
+                uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr-1))*1000000
+            else
+                uprecinnum = tonumber(string.sub(uprecinstr,2,#uprecinstr))
+            end
+        end
+
+        local mamanistr = game.Players.LocalPlayer.PlayerGui.ScreenGui.Frame.Coins.TextLabel.Text
+        mamanistr = mamanistr:gsub("%,", "")
+        Modnum = string.sub(mamanistr,#mamanistr,#mamanistr)
+        local mamaninum = nil
+        if(Modnum=="K")then
+            mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr-1))*1000
+        else
+            if(Modnum=="M") then
+                mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr-1))*1000000
+            else
+                mamaninum = tonumber(string.sub(mamanistr,2,#mamanistr))
+            end
+        end
+        if(uprecinnum<=mamaninum)then
+            local UbutoPaPagah = game.Workspace.Tycoons:WaitForChild(game.Players.LocalPlayer.Name).Buttons.Purchase_Bee
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,0)
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,UbutoPaPagah,1)
         end
     end
     if(config.mashupa)then
@@ -155,7 +163,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
         for i=1,#cumea do
             if(#cumea[i]:GetChildren()>3)then
                 local cadeotier = cumea[i].Bee:GetChildren()
-                local peraprr = 0
                 for i=1,#cadeotier do
                     if(#cadeotier[i]:GetChildren()>0 and cadeotier[i].ClassName == "MeshPart") then
                         local otier = tonumber(cadeotier[i].TierText.Frame.Tier.Text:split(" ")[2])
@@ -171,6 +178,44 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,merjador,1)
                 break
             end
+        end
+    end
+    if(config.auto2xextra)then
+        if(config.delai2xextraloop==0)then
+            if(game.Workspace.Obbies.Winter.Timer.BillboardGui.TextLabel.Text == "")then
+                if(config.tonoobbi)then
+                    if((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-game.Workspace.Obbies.Winter.Teleport_To.Position).magnitude<20)then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Obbies.Winter.Special_Task.Lever.CFrame
+                    end
+                    if((game.Players.LocalPlayer.Character.HumanoidRootPart.Position-game.Workspace.Obbies.Winter.Special_Task.Lever.Position).magnitude<20 and config.apertoalafodasse == false)then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Obbies.Winter.Special_Task.Lever.CFrame
+                        if(config.delai2xextra==0)then
+                            config.delai2xextra = 100
+                            config.apertoalafodasse=true
+                            print("Apertei",(game.Players.LocalPlayer.Character.HumanoidRootPart.Position-game.Workspace.Obbies.Winter.Special_Task.Lever.Position).magnitude)
+                            input.hold(Enum.KeyCode.E,3)
+                        else
+                            config.delai2xextra-=1
+                        end
+                    end
+                    if(game.Workspace.Obbies.Winter.UnlockAble.Lever.Transparency==0)then
+                        print("Foi Porra")
+                        config.delai2xextraloop = 200
+                        local toka = game.Workspace.Obbies.Winter.End_Obby
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = toka.CFrame
+                        config.tonoobbi = false
+                        config.apertoalafodasse = false
+                        -- config.auto2xextra = false
+                    end
+                else
+                    local toka = game.Workspace.Obbies.Winter.Teleport_Touch
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,toka,0)
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,toka,1)
+                    config.tonoobbi = true
+                end                
+            end
+        else
+            config.delai2xextraloop-=1
         end
     end
 end)
@@ -212,7 +257,7 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
     Top.Position = UDim2.new(0, 0, 0, 0)
     Top.Size = UDim2.new(0, Largura, 0, 25)    
-  
+
     Title.Name = "Titulorr"
     Title.Parent = Top
     Title.BackgroundColor3 = TomPrimario
@@ -232,7 +277,7 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     ContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
     ContainerFunc.Position = UDim2.new(0, 5, 0, 31)
     ContainerFunc.Size = UDim2.new(0, Largura-10, 0, Altura-36)   
-     
+    
     TopContainerFunc.Name = "TituloContainerFunc"
     TopContainerFunc.Parent = ContainerFunc
     TopContainerFunc.BackgroundColor3 = TomPrimario
@@ -270,7 +315,7 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     TogCont.Text = ""
     TogCont.AutoButtonColor = false
 
-    ChkBox.Name = "ChkBoxTog"
+    ChkBox.Name = "ChkBox"
     ChkBox.Parent = TogCont
     ChkBox.BackgroundColor3 = TomQuaternario
     ChkBox.Position = UDim2.new(0, 0, 0, 0)
@@ -322,10 +367,26 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     TogTitle.TextWrapped = true
     TogTitle.TextXAlignment = Enum.TextXAlignment.Left
 
+    TogCont = TogCont:Clone()
+    TogCont.Parent = ContainerFunc
+    TogCont.Position = UDim2.new(0, 5, 0, 31+25+5)
+    TogCont.TogTitle.Text = "Auto Obby Extra"
+    TogCont.MouseButton1Click:Connect(function()
+        if(TogCont.ChkBox.TogState.Visible)then
+            TogCont.ChkBox.TogState.Visible = false
+            config.auto2xextra = false
+        else
+            if not(TogCont.ChkBox.TogState.Visible)then
+                TogCont.ChkBox.TogState.Visible = true
+                config.auto2xextra = true
+            end
+        end
+    end)
+
     ButtonOnly.Name = "Matador"
     ButtonOnly.Parent = ContainerFunc
     ButtonOnly.BackgroundColor3 = ChkBox.BackgroundColor3
-    ButtonOnly.Position = UDim2.new(0, 5, 0, 31+25+5)
+    ButtonOnly.Position = UDim2.new(0, 5, 0, 31+60)
     ButtonOnly.Size = UDim2.new(0, Largura-20, 0, 25)
     ButtonOnly.BorderSizePixel = 1
     ButtonOnly.BorderColor3 = Color3.fromRGB(10,10,10)
@@ -341,7 +402,8 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
         config.maitaxa = false
         config.mashupa = false
         config.antiafk = false
+        config.auto2xextra = false
         h:Destroy()
     end)
 end
-CriarJanelaBase(300,128,Color3.new(0.227450, 0.188235, 0.050980))
+CriarJanelaBase(300,(5*25)+(5*6)+2,Color3.new(0.227450, 0.188235, 0.050980))
