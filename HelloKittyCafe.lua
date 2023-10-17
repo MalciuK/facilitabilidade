@@ -1,5 +1,3 @@
-local ContextActionService = game:GetService("ContextActionService")
-loadstring(game:HttpGet('https://raw.githubusercontent.com/1uaxx/yunv2/main/librarysource.lua'))()
 local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
 function GetObject(Astring)
     local ospedaco = Astring:split(".")
@@ -22,20 +20,6 @@ local config = {
     doceku = false
 }
 
-local Library = initLibrary()
-local Window = Library:Load({
-    name = "Super Hack do Niquinistiquiniquis pra Cauany",
-    sizeX = 425,
-    sizeY = 165,
-    color = Color3.fromRGB(255, 255, 255)
-})
-function  KillMe()
-    Window:Hide()
-end
-
-local Tab = Window:Tab("Cafezinho Reloquiti")
-local Inicio = Tab:Section { name = "Inicio"} 
-
 local OqMostrar = game.Workspace:GetChildren()
 local Cafe = false
 local Kuromi = false
@@ -53,20 +37,179 @@ for i=1, #OqMostrar do
 end
 
 if(Cafe)then
-    Inicio:Toggle{
-        Name = "Pegar Baus",
-        flag = "bau",
-        callback = function(oq)
-            config.autochest = oq
-        end
-    }
-    Inicio:Toggle{
-        Name = "AutoWork",
-        flag = "work",
-        callback = function(oq)
-            config.autowork = oq
-        end
-    }
+    function CriarJanelaBase(Largura,Altura,TomPrimario)
+        local h = Instance.new("ScreenGui")
+        local Main = Instance.new("ImageLabel")
+        local Top = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local ContainerFunc = Instance.new("Frame")
+        local TopContainerFunc = Instance.new("Frame")
+        local TitleJogo = Instance.new("TextLabel")
+    
+        local modpertom = 8/255
+        local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local TomTerciario = Color3.new(TomSecundario.R+modpertom,TomSecundario.G+modpertom,TomSecundario.B+modpertom)
+        local TomQuaternario = Color3.new(TomTerciario.R+modpertom,TomTerciario.G+modpertom,TomTerciario.B+modpertom)
+        local TomQuintenario = Color3.new(TomQuaternario.R+modpertom,TomQuaternario.G+modpertom,TomQuaternario.B+modpertom)
+        local TomSextenario = Color3.new(TomQuintenario.R+modpertom,TomQuintenario.G+modpertom,TomQuintenario.B+modpertom)
+    
+        h.Name = "NixtiscriptEsteveAquiiiUwU"
+        h.Parent = game:GetService("CoreGui")
+        h.ResetOnSpawn = false
+    
+        Main.Name = "Main"
+        Main.Parent = h
+        Main.Active = true
+        Main.Draggable = true
+        Main.BackgroundColor3 = TomTerciario
+        Main.BorderSizePixel = 1
+        Main.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Main.Position = UDim2.new(0, 0, 0, 0)
+        Main.Size = UDim2.new(0, Largura, 0, Altura)
+    
+        Top.Name = "TituloContainer"
+        Top.Parent = Main
+        Top.BackgroundColor3 = TomPrimario
+        Top.BorderSizePixel = 1
+        Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Top.Position = UDim2.new(0, 0, 0, 0)
+        Top.Size = UDim2.new(0, Largura, 0, 25)    
+      
+        Title.Name = "Titulorr"
+        Title.Parent = Top
+        Title.BackgroundColor3 = TomPrimario
+        Title.BorderSizePixel = 0
+        Title.Position = UDim2.new(0, 0, 0, 0)
+        Title.Size = UDim2.new(0, Largura, 0, 25)
+        Title.Font = Enum.Font.GothamSemibold
+        Title.Text = "Super Hack do Niquistiniquis"
+        Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Title.TextSize = 14.000
+        Title.TextWrapped = true
+    
+        ContainerFunc.Name = "ContainerFuncoes"
+        ContainerFunc.Parent = Main
+        ContainerFunc.BackgroundColor3 = TomSecundario
+        ContainerFunc.BorderSizePixel = 1
+        ContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        ContainerFunc.Position = UDim2.new(0, 5, 0, 31)
+        ContainerFunc.Size = UDim2.new(0, Largura-10, 0, Altura-36)   
+         
+        TopContainerFunc.Name = "TituloContainerFunc"
+        TopContainerFunc.Parent = ContainerFunc
+        TopContainerFunc.BackgroundColor3 = TomPrimario
+        TopContainerFunc.BorderSizePixel = 1
+        TopContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        TopContainerFunc.Position = UDim2.new(0, 0, 0, 0)
+        TopContainerFunc.Size = UDim2.new(0, Largura-10, 0, 25)    
+    
+        TitleJogo.Name = "TitulorrJogo"
+        TitleJogo.Parent = TopContainerFunc
+        TitleJogo.BackgroundColor3 = TomPrimario
+        TitleJogo.BorderSizePixel = 0
+        TitleJogo.Position = UDim2.new(0, 10, 0, 0)
+        TitleJogo.Size = UDim2.new(0, Largura-20, 0, 25)
+        TitleJogo.Font = Enum.Font.GothamSemibold
+        TitleJogo.Text = "Hello Kitty Cafe"
+        TitleJogo.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TitleJogo.TextSize = 14.000
+        TitleJogo.TextWrapped = true
+        TitleJogo.TextXAlignment = Enum.TextXAlignment.Left
+    
+        local TogCont = Instance.new("TextButton")
+        local ChkBox = Instance.new("Frame")
+        local redondar = Instance.new('UICorner')
+        local TogTitle = Instance.new("TextLabel")
+        local TogState = Instance.new("Frame")
+        local ButtonOnly = Instance.new("TextButton")
+    
+        TogCont.Name = "TogCont"
+        TogCont.Parent = ContainerFunc
+        TogCont.BackgroundColor3 = TomSecundario
+        TogCont.BorderSizePixel = 0
+        TogCont.Position = UDim2.new(0, 5, 0, 31)
+        TogCont.Size = UDim2.new(0, Largura-20, 0, 25)
+        TogCont.Text = ""
+        TogCont.AutoButtonColor = false
+    
+        ChkBox.Name = "ChkBox"
+        ChkBox.Parent = TogCont
+        ChkBox.BackgroundColor3 = TomQuaternario
+        ChkBox.Position = UDim2.new(0, 0, 0, 0)
+        ChkBox.Size = UDim2.new(0, 25, 0, 25)  
+        redondar.Name = "ArredondaSaporra"
+        redondar.Parent = ChkBox
+        TogState.Name = "TogState"
+        TogState.Parent = ChkBox
+        TogState.BackgroundColor3 = TomSextenario
+        TogState.Position = UDim2.new(0, 2, 0, 2)
+        TogState.Size = UDim2.new(0, 21, 0, 21)
+        TogState.Visible = false
+        local redondar2 = redondar:Clone()
+        redondar2.Name = "ArredondaSaporra"
+        redondar2.Parent = TogState
+        
+        TogCont.MouseButton1Click:Connect(function()
+            if(ChkBox.TogState.Visible)then
+                ChkBox.TogState.Visible = false
+                config.autowork = false
+            else
+                if not(ChkBox.TogState.Visible)then
+                    ChkBox.TogState.Visible = true
+                    config.autowork = true
+                end
+            end
+        end)
+        TogTitle.Name = "TogTitle"
+        TogTitle.Parent = TogCont
+        TogTitle.BackgroundColor3 = TogCont.BackgroundColor3
+        TogTitle.BorderSizePixel = 0
+        TogTitle.Position = UDim2.new(0, 25+5, 0, 0)
+        TogTitle.Size = UDim2.new(0, Largura-20-25-5, 0, 25)
+        TogTitle.Font = Enum.Font.GothamSemibold
+        TogTitle.Text = "Trabalhar Automatico"
+        TogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TogTitle.TextSize = 14.000
+        TogTitle.TextWrapped = true
+        TogTitle.TextXAlignment = Enum.TextXAlignment.Left
+    
+        TogCont = TogCont:Clone()
+        TogCont.Parent = ContainerFunc
+        TogCont.Position = UDim2.new(0, 5, 0, 31+25+5)
+        TogCont.TogTitle.Text = "Pegar Baús"
+        TogCont.MouseButton1Click:Connect(function()
+            if(TogCont.ChkBox.TogState.Visible)then
+                TogCont.ChkBox.TogState.Visible = false
+                config.autochest = false
+            else
+                if not(TogCont.ChkBox.TogState.Visible)then
+                    TogCont.ChkBox.TogState.Visible = true
+                    config.autochest = true
+                end
+            end
+        end)
+
+
+    
+        ButtonOnly.Name = "Matador"
+        ButtonOnly.Parent = ContainerFunc
+        ButtonOnly.BackgroundColor3 = ChkBox.BackgroundColor3
+        ButtonOnly.Position = UDim2.new(0, 5, 0, 31+60)
+        ButtonOnly.Size = UDim2.new(0, Largura-20, 0, 25)
+        ButtonOnly.BorderSizePixel = 1
+        ButtonOnly.BorderColor3 = Color3.fromRGB(10,10,10)
+        ButtonOnly.Text = "Fechar UI"
+        ButtonOnly.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ButtonOnly.Font = Enum.Font.GothamSemibold
+        ButtonOnly.TextSize = 14.000
+        ButtonOnly.TextWrapped = true
+        ButtonOnly.MouseButton1Click:Connect(function()
+            config.autochest = false
+            config.autowork = false
+            h:Destroy()
+        end)
+    end
+    CriarJanelaBase(300,(5*25)+(6*5)+2,Color3.new(0.227450, 0.050980, 0.168627))
     local travacliente = false
     local travabi = 0
     game:GetService("RunService").RenderStepped:Connect(function() 
@@ -377,13 +520,160 @@ if(Cafe)then
     end)
 end
 if(Kuromi)then
-    Inicio:Toggle{
-        Name = "Doces Kuromii",
-        flag ="dk",
-        callback = function(oq)
-            config.doceku = oq
-        end
-    }
+    function CriarJanelaBase(Largura,Altura,TomPrimario)
+        local h = Instance.new("ScreenGui")
+        local Main = Instance.new("ImageLabel")
+        local Top = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local ContainerFunc = Instance.new("Frame")
+        local TopContainerFunc = Instance.new("Frame")
+        local TitleJogo = Instance.new("TextLabel")
+    
+        local modpertom = 8/255
+        local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local TomTerciario = Color3.new(TomSecundario.R+modpertom,TomSecundario.G+modpertom,TomSecundario.B+modpertom)
+        local TomQuaternario = Color3.new(TomTerciario.R+modpertom,TomTerciario.G+modpertom,TomTerciario.B+modpertom)
+        local TomQuintenario = Color3.new(TomQuaternario.R+modpertom,TomQuaternario.G+modpertom,TomQuaternario.B+modpertom)
+        local TomSextenario = Color3.new(TomQuintenario.R+modpertom,TomQuintenario.G+modpertom,TomQuintenario.B+modpertom)
+    
+        h.Name = "NixtiscriptEsteveAquiiiUwU"
+        h.Parent = game:GetService("CoreGui")
+        h.ResetOnSpawn = false
+    
+        Main.Name = "Main"
+        Main.Parent = h
+        Main.Active = true
+        Main.Draggable = true
+        Main.BackgroundColor3 = TomTerciario
+        Main.BorderSizePixel = 1
+        Main.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Main.Position = UDim2.new(0, 0, 0, 0)
+        Main.Size = UDim2.new(0, Largura, 0, Altura)
+    
+        Top.Name = "TituloContainer"
+        Top.Parent = Main
+        Top.BackgroundColor3 = TomPrimario
+        Top.BorderSizePixel = 1
+        Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Top.Position = UDim2.new(0, 0, 0, 0)
+        Top.Size = UDim2.new(0, Largura, 0, 25)    
+      
+        Title.Name = "Titulorr"
+        Title.Parent = Top
+        Title.BackgroundColor3 = TomPrimario
+        Title.BorderSizePixel = 0
+        Title.Position = UDim2.new(0, 0, 0, 0)
+        Title.Size = UDim2.new(0, Largura, 0, 25)
+        Title.Font = Enum.Font.GothamSemibold
+        Title.Text = "Super Hack do Niquistiniquis"
+        Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Title.TextSize = 14.000
+        Title.TextWrapped = true
+    
+        ContainerFunc.Name = "ContainerFuncoes"
+        ContainerFunc.Parent = Main
+        ContainerFunc.BackgroundColor3 = TomSecundario
+        ContainerFunc.BorderSizePixel = 1
+        ContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        ContainerFunc.Position = UDim2.new(0, 5, 0, 31)
+        ContainerFunc.Size = UDim2.new(0, Largura-10, 0, Altura-36)   
+         
+        TopContainerFunc.Name = "TituloContainerFunc"
+        TopContainerFunc.Parent = ContainerFunc
+        TopContainerFunc.BackgroundColor3 = TomPrimario
+        TopContainerFunc.BorderSizePixel = 1
+        TopContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        TopContainerFunc.Position = UDim2.new(0, 0, 0, 0)
+        TopContainerFunc.Size = UDim2.new(0, Largura-10, 0, 25)    
+    
+        TitleJogo.Name = "TitulorrJogo"
+        TitleJogo.Parent = TopContainerFunc
+        TitleJogo.BackgroundColor3 = TomPrimario
+        TitleJogo.BorderSizePixel = 0
+        TitleJogo.Position = UDim2.new(0, 10, 0, 0)
+        TitleJogo.Size = UDim2.new(0, Largura-20, 0, 25)
+        TitleJogo.Font = Enum.Font.GothamSemibold
+        TitleJogo.Text = "Hello Kitty Cafe"
+        TitleJogo.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TitleJogo.TextSize = 14.000
+        TitleJogo.TextWrapped = true
+        TitleJogo.TextXAlignment = Enum.TextXAlignment.Left
+    
+        local TogCont = Instance.new("TextButton")
+        local ChkBox = Instance.new("Frame")
+        local redondar = Instance.new('UICorner')
+        local TogTitle = Instance.new("TextLabel")
+        local TogState = Instance.new("Frame")
+        local ButtonOnly = Instance.new("TextButton")
+    
+        TogCont.Name = "TogCont"
+        TogCont.Parent = ContainerFunc
+        TogCont.BackgroundColor3 = TomSecundario
+        TogCont.BorderSizePixel = 0
+        TogCont.Position = UDim2.new(0, 5, 0, 31)
+        TogCont.Size = UDim2.new(0, Largura-20, 0, 25)
+        TogCont.Text = ""
+        TogCont.AutoButtonColor = false
+    
+        ChkBox.Name = "ChkBox"
+        ChkBox.Parent = TogCont
+        ChkBox.BackgroundColor3 = TomQuaternario
+        ChkBox.Position = UDim2.new(0, 0, 0, 0)
+        ChkBox.Size = UDim2.new(0, 25, 0, 25)  
+        redondar.Name = "ArredondaSaporra"
+        redondar.Parent = ChkBox
+        TogState.Name = "TogState"
+        TogState.Parent = ChkBox
+        TogState.BackgroundColor3 = TomSextenario
+        TogState.Position = UDim2.new(0, 2, 0, 2)
+        TogState.Size = UDim2.new(0, 21, 0, 21)
+        TogState.Visible = false
+        local redondar2 = redondar:Clone()
+        redondar2.Name = "ArredondaSaporra"
+        redondar2.Parent = TogState
+        
+        TogCont.MouseButton1Click:Connect(function()
+            if(ChkBox.TogState.Visible)then
+                ChkBox.TogState.Visible = false
+                config.doceku = false
+            else
+                if not(ChkBox.TogState.Visible)then
+                    ChkBox.TogState.Visible = true
+                    config.doceku = true
+                end
+            end
+        end)
+        TogTitle.Name = "TogTitle"
+        TogTitle.Parent = TogCont
+        TogTitle.BackgroundColor3 = TogCont.BackgroundColor3
+        TogTitle.BorderSizePixel = 0
+        TogTitle.Position = UDim2.new(0, 25+5, 0, 0)
+        TogTitle.Size = UDim2.new(0, Largura-20-25-5, 0, 25)
+        TogTitle.Font = Enum.Font.GothamSemibold
+        TogTitle.Text = "Pegar Doces da Kuromii"
+        TogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TogTitle.TextSize = 14.000
+        TogTitle.TextWrapped = true
+        TogTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+        ButtonOnly.Name = "Matador"
+        ButtonOnly.Parent = ContainerFunc
+        ButtonOnly.BackgroundColor3 = ChkBox.BackgroundColor3
+        ButtonOnly.Position = UDim2.new(0, 5, 0, 31+30)
+        ButtonOnly.Size = UDim2.new(0, Largura-20, 0, 25)
+        ButtonOnly.BorderSizePixel = 1
+        ButtonOnly.BorderColor3 = Color3.fromRGB(10,10,10)
+        ButtonOnly.Text = "Fechar UI"
+        ButtonOnly.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ButtonOnly.Font = Enum.Font.GothamSemibold
+        ButtonOnly.TextSize = 14.000
+        ButtonOnly.TextWrapped = true
+        ButtonOnly.MouseButton1Click:Connect(function()
+            config.doceku = false
+            h:Destroy()
+        end)
+    end
+    CriarJanelaBase(300,(4*25)+(5*5)+2,Color3.new(0.227450, 0.050980, 0.168627))
 
     function Pushadoce()
         local osdoce = game.Workspace.MapItem.Gold:GetChildren()
@@ -422,14 +712,162 @@ if(Kuromi)then
     -- end
 end
 if(Keroppi)then
-    Inicio:Toggle{
-        Name = "AutoWin",
-        flag = "asd",
-        callback = function(oq)
-            config.keroppi = oq
-        end
-    }
     
+    function CriarJanelaBase(Largura,Altura,TomPrimario)
+        local h = Instance.new("ScreenGui")
+        local Main = Instance.new("ImageLabel")
+        local Top = Instance.new("Frame")
+        local Title = Instance.new("TextLabel")
+        local ContainerFunc = Instance.new("Frame")
+        local TopContainerFunc = Instance.new("Frame")
+        local TitleJogo = Instance.new("TextLabel")
+    
+        local modpertom = 8/255
+        local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local TomTerciario = Color3.new(TomSecundario.R+modpertom,TomSecundario.G+modpertom,TomSecundario.B+modpertom)
+        local TomQuaternario = Color3.new(TomTerciario.R+modpertom,TomTerciario.G+modpertom,TomTerciario.B+modpertom)
+        local TomQuintenario = Color3.new(TomQuaternario.R+modpertom,TomQuaternario.G+modpertom,TomQuaternario.B+modpertom)
+        local TomSextenario = Color3.new(TomQuintenario.R+modpertom,TomQuintenario.G+modpertom,TomQuintenario.B+modpertom)
+    
+        h.Name = "NixtiscriptEsteveAquiiiUwU"
+        h.Parent = game:GetService("CoreGui")
+        h.ResetOnSpawn = false
+    
+        Main.Name = "Main"
+        Main.Parent = h
+        Main.Active = true
+        Main.Draggable = true
+        Main.BackgroundColor3 = TomTerciario
+        Main.BorderSizePixel = 1
+        Main.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Main.Position = UDim2.new(0, 0, 0, 0)
+        Main.Size = UDim2.new(0, Largura, 0, Altura)
+    
+        Top.Name = "TituloContainer"
+        Top.Parent = Main
+        Top.BackgroundColor3 = TomPrimario
+        Top.BorderSizePixel = 1
+        Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        Top.Position = UDim2.new(0, 0, 0, 0)
+        Top.Size = UDim2.new(0, Largura, 0, 25)    
+      
+        Title.Name = "Titulorr"
+        Title.Parent = Top
+        Title.BackgroundColor3 = TomPrimario
+        Title.BorderSizePixel = 0
+        Title.Position = UDim2.new(0, 0, 0, 0)
+        Title.Size = UDim2.new(0, Largura, 0, 25)
+        Title.Font = Enum.Font.GothamSemibold
+        Title.Text = "Super Hack do Niquistiniquis"
+        Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Title.TextSize = 14.000
+        Title.TextWrapped = true
+    
+        ContainerFunc.Name = "ContainerFuncoes"
+        ContainerFunc.Parent = Main
+        ContainerFunc.BackgroundColor3 = TomSecundario
+        ContainerFunc.BorderSizePixel = 1
+        ContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        ContainerFunc.Position = UDim2.new(0, 5, 0, 31)
+        ContainerFunc.Size = UDim2.new(0, Largura-10, 0, Altura-36)   
+         
+        TopContainerFunc.Name = "TituloContainerFunc"
+        TopContainerFunc.Parent = ContainerFunc
+        TopContainerFunc.BackgroundColor3 = TomPrimario
+        TopContainerFunc.BorderSizePixel = 1
+        TopContainerFunc.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        TopContainerFunc.Position = UDim2.new(0, 0, 0, 0)
+        TopContainerFunc.Size = UDim2.new(0, Largura-10, 0, 25)    
+    
+        TitleJogo.Name = "TitulorrJogo"
+        TitleJogo.Parent = TopContainerFunc
+        TitleJogo.BackgroundColor3 = TomPrimario
+        TitleJogo.BorderSizePixel = 0
+        TitleJogo.Position = UDim2.new(0, 10, 0, 0)
+        TitleJogo.Size = UDim2.new(0, Largura-20, 0, 25)
+        TitleJogo.Font = Enum.Font.GothamSemibold
+        TitleJogo.Text = "Hello Kitty Cafe"
+        TitleJogo.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TitleJogo.TextSize = 14.000
+        TitleJogo.TextWrapped = true
+        TitleJogo.TextXAlignment = Enum.TextXAlignment.Left
+    
+        local TogCont = Instance.new("TextButton")
+        local ChkBox = Instance.new("Frame")
+        local redondar = Instance.new('UICorner')
+        local TogTitle = Instance.new("TextLabel")
+        local TogState = Instance.new("Frame")
+        local ButtonOnly = Instance.new("TextButton")
+    
+        TogCont.Name = "TogCont"
+        TogCont.Parent = ContainerFunc
+        TogCont.BackgroundColor3 = TomSecundario
+        TogCont.BorderSizePixel = 0
+        TogCont.Position = UDim2.new(0, 5, 0, 31)
+        TogCont.Size = UDim2.new(0, Largura-20, 0, 25)
+        TogCont.Text = ""
+        TogCont.AutoButtonColor = false
+    
+        ChkBox.Name = "ChkBox"
+        ChkBox.Parent = TogCont
+        ChkBox.BackgroundColor3 = TomQuaternario
+        ChkBox.Position = UDim2.new(0, 0, 0, 0)
+        ChkBox.Size = UDim2.new(0, 25, 0, 25)  
+        redondar.Name = "ArredondaSaporra"
+        redondar.Parent = ChkBox
+        TogState.Name = "TogState"
+        TogState.Parent = ChkBox
+        TogState.BackgroundColor3 = TomSextenario
+        TogState.Position = UDim2.new(0, 2, 0, 2)
+        TogState.Size = UDim2.new(0, 21, 0, 21)
+        TogState.Visible = false
+        local redondar2 = redondar:Clone()
+        redondar2.Name = "ArredondaSaporra"
+        redondar2.Parent = TogState
+        
+        TogCont.MouseButton1Click:Connect(function()
+            if(ChkBox.TogState.Visible)then
+                ChkBox.TogState.Visible = false
+                config.keroppi = false
+            else
+                if not(ChkBox.TogState.Visible)then
+                    ChkBox.TogState.Visible = true
+                    config.keroppi = true
+                end
+            end
+        end)
+        TogTitle.Name = "TogTitle"
+        TogTitle.Parent = TogCont
+        TogTitle.BackgroundColor3 = TogCont.BackgroundColor3
+        TogTitle.BorderSizePixel = 0
+        TogTitle.Position = UDim2.new(0, 25+5, 0, 0)
+        TogTitle.Size = UDim2.new(0, Largura-20-25-5, 0, 25)
+        TogTitle.Font = Enum.Font.GothamSemibold
+        TogTitle.Text = "Keroppi Auto Win"
+        TogTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TogTitle.TextSize = 14.000
+        TogTitle.TextWrapped = true
+        TogTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+        ButtonOnly.Name = "Matador"
+        ButtonOnly.Parent = ContainerFunc
+        ButtonOnly.BackgroundColor3 = ChkBox.BackgroundColor3
+        ButtonOnly.Position = UDim2.new(0, 5, 0, 31+30)
+        ButtonOnly.Size = UDim2.new(0, Largura-20, 0, 25)
+        ButtonOnly.BorderSizePixel = 1
+        ButtonOnly.BorderColor3 = Color3.fromRGB(10,10,10)
+        ButtonOnly.Text = "Fechar UI"
+        ButtonOnly.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ButtonOnly.Font = Enum.Font.GothamSemibold
+        ButtonOnly.TextSize = 14.000
+        ButtonOnly.TextWrapped = true
+        ButtonOnly.MouseButton1Click:Connect(function()
+            config.keroppi = false
+            h:Destroy()
+        end)
+    end
+    CriarJanelaBase(300,(4*25)+(5*5)+2,Color3.new(0.227450, 0.050980, 0.168627))
+
     local osbaparr = {}
     local osbapa = game.Workspace:GetChildren()
     for i=1,#osbapa do
@@ -475,24 +913,3 @@ function MudaVelocidade(q)
     if(q==3)then game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 60 end
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16*q
 end
-Inicio:Slider{
-    Name = "Velocidade",
-    Default = 1,
-    Min = 1,
-    Max = 3.75,
-    Decimals = 2,
-    Flag = "walkspeed",
-    callback = function(value)
-        MudaVelocidade(value)
-    end
-}
-
-Inicio:Button{
-    Name = "Fechar UI",
-    callback = function()
-        config.autowork=false
-        config.autochest=false
-        config.keroppi=false
-        KillMe()
-    end
-}
