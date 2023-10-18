@@ -200,7 +200,7 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     TitleJogo.Position = UDim2.new(0, 10, 0, 0)
     TitleJogo.Size = UDim2.new(0, Largura-20, 0, 25)
     TitleJogo.Font = Enum.Font.GothamSemibold
-    TitleJogo.Text = "Bee Factory Tycoon"
+    TitleJogo.Text = "Kittyyy Tycoon"
     TitleJogo.TextColor3 = Color3.fromRGB(255, 255, 255)
     TitleJogo.TextSize = 14.000
     TitleJogo.TextWrapped = true
