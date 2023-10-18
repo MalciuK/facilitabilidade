@@ -17,7 +17,8 @@ local config = {
     keroppi = false,
     transs = false,
     winkeroppi = false,
-    doceku = false
+    doceku = false,
+    antiafk = false
 }
 
 local OqMostrar = game.Workspace:GetChildren()
@@ -153,10 +154,12 @@ if(Cafe)then
             if(ChkBox.TogState.Visible)then
                 ChkBox.TogState.Visible = false
                 config.autowork = false
+                config.antiafk = false
             else
                 if not(ChkBox.TogState.Visible)then
                     ChkBox.TogState.Visible = true
                     config.autowork = true
+                    config.antiafk = true
                 end
             end
         end)
@@ -181,10 +184,12 @@ if(Cafe)then
             if(TogCont.ChkBox.TogState.Visible)then
                 TogCont.ChkBox.TogState.Visible = false
                 config.autochest = false
+                config.antiafk = false
             else
                 if not(TogCont.ChkBox.TogState.Visible)then
                     TogCont.ChkBox.TogState.Visible = true
                     config.autochest = true
+                    config.antiafk = true
                 end
             end
         end)
@@ -206,13 +211,23 @@ if(Cafe)then
         ButtonOnly.MouseButton1Click:Connect(function()
             config.autochest = false
             config.autowork = false
+            config.antiafk = false
             h:Destroy()
         end)
     end
     CriarJanelaBase(300,(5*25)+(6*5)+2,Color3.new(0.227450, 0.050980, 0.168627))
     local travacliente = false
     local travabi = 0
+    local antiaff = 500
     game:GetService("RunService").RenderStepped:Connect(function() 
+        if(config.antiafk)then
+            if(antiaff>0)then
+                antiaff -=1
+            else
+                input.press(Enum.KeyCode.Space)
+                antiaff = 500
+            end
+        end
         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
         if not(config.travad)then
             if(config.delai==0) then
@@ -636,10 +651,12 @@ if(Kuromi)then
             if(ChkBox.TogState.Visible)then
                 ChkBox.TogState.Visible = false
                 config.doceku = false
+                config.antiafk = false
             else
                 if not(ChkBox.TogState.Visible)then
                     ChkBox.TogState.Visible = true
                     config.doceku = true
+                    config.antiafk = true
                 end
             end
         end)
@@ -670,6 +687,7 @@ if(Kuromi)then
         ButtonOnly.TextWrapped = true
         ButtonOnly.MouseButton1Click:Connect(function()
             config.doceku = false
+            config.antiafk = false
             h:Destroy()
         end)
     end
@@ -682,7 +700,16 @@ if(Kuromi)then
         end
     end
     
+    local antiaff = 500
     game:GetService("RunService").RenderStepped:Connect(function() 
+        if(config.antiafk)then
+            if(antiaff>0)then
+                antiaff -=1
+            else
+                input.press(Enum.KeyCode.Space)
+                antiaff = 500
+            end
+        end
         if(config.doceku)then
             Pushadoce()
         end
@@ -829,10 +856,12 @@ if(Keroppi)then
             if(ChkBox.TogState.Visible)then
                 ChkBox.TogState.Visible = false
                 config.keroppi = false
+                config.antiafk = false
             else
                 if not(ChkBox.TogState.Visible)then
                     ChkBox.TogState.Visible = true
                     config.keroppi = true
+                    config.antiafk = true
                 end
             end
         end)
@@ -863,6 +892,7 @@ if(Keroppi)then
         ButtonOnly.TextWrapped = true
         ButtonOnly.MouseButton1Click:Connect(function()
             config.keroppi = false
+            config.antiafk = false
             h:Destroy()
         end)
     end
@@ -881,7 +911,16 @@ if(Keroppi)then
         end
     end
 
-    game:GetService("RunService").RenderStepped:Connect(function()
+    local antiaff = 500
+    game:GetService("RunService").RenderStepped:Connect(function() 
+        if(config.antiafk)then
+            if(antiaff>0)then
+                antiaff -=1
+            else
+                input.press(Enum.KeyCode.Space)
+                antiaff = 500
+            end
+        end
         -- if(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y<=5 and game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.y>=0 and config.winkeroppi)then
         --     config.winkeroppi = false
         -- end
