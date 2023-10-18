@@ -265,7 +265,7 @@ function CriarJanelaBase(Largura,Altura,TomPrimario)
     Title.Position = UDim2.new(0, 0, 0, 0)
     Title.Size = UDim2.new(0, Largura, 0, 25)
     Title.Font = Enum.Font.GothamSemibold
-    Title.Text = "Super Hack do Niquistiniqui pro Krotoo"
+    Title.Text = "Super Hack do Niquistiniqui q odeia o Kroto"
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 14.000
     Title.TextWrapped = true
