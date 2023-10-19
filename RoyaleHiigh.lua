@@ -16,7 +16,7 @@ function TerminaCom(astring,pedaco)
 end
 local config = {
     GetCandyyy = false,
-    DelayMaxPorta = 500
+    DelayMaxPorta = 250
 }
 print((tonumber("3")), tonumber("3.2"))
 local Library = initLibrary()
@@ -42,6 +42,9 @@ Inicio:Toggle{
 }
 
 local asporta = game.Workspace.TrickorTreatDoors:GetChildren()
+game.Workspace.TrickorTreatDoors.ChildAdded:Connect(function(obj) 
+    table.insert(asporta,obj)
+end)
 local currpor = 1
 local delayproxporta = 0
 local tolah = false
@@ -71,13 +74,15 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 tolah = false
             else
                 currpor+=1
+                if(currpor>#asporta)then
+                    currpor=1
+                end
             end
 
         else
             delayproxporta-=1
         end
         input.press(Enum.KeyCode.E)
-
     end
 end)
 
