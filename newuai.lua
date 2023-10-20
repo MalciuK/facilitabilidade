@@ -176,6 +176,7 @@ Funqis = {
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
     end
 }
+return Funqis
 
 -- local Window = CriarJanelaBase("Super Interface do Niquispiroca",250,500,Color3.new(0.160784, 0.160784, 0.160784))
 -- local Janela = CriarJanelaFunc(Window,"Royaleeee Altoooooo")
