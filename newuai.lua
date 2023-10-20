@@ -1,5 +1,6 @@
 Funqis = {
     CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario)
+        Altura = 70
         local h = Instance.new("ScreenGui")
         local Main = Instance.new("ImageLabel")
         local Top = Instance.new("Frame")
@@ -149,6 +150,7 @@ Funqis = {
         TogTitle.TextXAlignment = Enum.TextXAlignment.Left
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
     end,
     CriarButt = function (JanB,Titulo,afunc)
         local ButtonOnly = Instance.new("TextButton")
@@ -174,11 +176,11 @@ Funqis = {
             afunc()
         end)
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
     end
 }
-return Funqis
+-- return Funqis
 
--- local Window = CriarJanelaBase("Super Interface do Niquispiroca",250,500,Color3.new(0.160784, 0.160784, 0.160784))
--- local Janela = CriarJanelaFunc(Window,"Royaleeee Altoooooo")
--- local Togg = CriarTogg(Janela,"TogExemplo",function (a) print(a) end)
--- local Butt = CriarButt(Janela,"Butaozim",function() print("me cricaro") end)
+-- local Window = Funqis.CriarJanelaBase("Super Interface do Niquispiroca",250,70,Color3.new(0.160784, 0.160784, 0.160784))
+-- local Janela = Funqis.CriarJanelaFunc(Window,"Royaleeee Altoooooo")
+-- local Toggg = Funqis.CriarTogg(Janela,"asdasd",function(a)print(a)end)
