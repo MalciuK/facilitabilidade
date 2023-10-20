@@ -1,44 +1,8 @@
-loadstring(game:HttpGet('https://raw.githubusercontent.com/1uaxx/yunv2/main/librarysource.lua'))()
+local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
 local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
-function GetObject(Astring)
-    local ospedaco = Astring:split(".")
-    local manda = game
-    for i=1,#ospedaco do
-        manda = manda:FindFirstChild(ospedaco[i])
-    end
-    return manda
-end
-function StartaCom(astring,pedaco)
-    return string.sub(astring,1,string.len(pedaco))==pedaco
-end
-function TerminaCom(astring,pedaco)
-    return string.sub(astring,string.len(astring)-string.len(pedaco)+1,string.len(astring))==pedaco
-end
 local config = {
     GetCandyyy = false,
     DelayMaxPorta = 250
-}
-print((tonumber("3")), tonumber("3.2"))
-local Library = initLibrary()
-local Window = Library:Load({
-    name = "Super Hack do Niquinistiquiniquis pro Diiii",
-    sizeX = 425,
-    sizeY = 165,
-    color = Color3.fromRGB(255, 255, 255)
-})
-function  KillMe()
-    Window:Hide()
-end
-
-local Tab = Window:Tab("Royale Hiiigh")
-local Inicio = Tab:Section { name = "Inicio"}
-
-Inicio:Toggle{
-    Name="Get Candyyy",
-    flag="asdasd",
-    callback=function(oq)
-        config.GetCandyyy = oq
-    end
 }
 
 local asporta = game.Workspace.TrickorTreatDoors:GetChildren()
@@ -86,10 +50,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 end)
 
-Inicio:Button{
-    Name = "Fechar UI",
-    callback = function()
-        config.GetCandyyy = false
-        KillMe()
-    end
-}
+
+local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs pro Dii",250,500,Color3.new(0.149019, 0.078431, 0.188235))
+local Janela = Uai.CriarJanelaFunc(Window,"Royaleeee Altoooooo")
+local Togg = Uai.CriarTogg(Janela,"Pegar Docinhos",function (a) config.GetCandyyy = a end)
+local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() end)
