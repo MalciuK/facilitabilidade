@@ -1,8 +1,6 @@
 Funqis = {
     CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario)
-        if(Altura<25+25+14)then
-            Altura = 64
-        end
+        Altura = 70
         local h = Instance.new("ScreenGui")
         local Main = Instance.new("ImageLabel")
         local Top = Instance.new("Frame")
@@ -182,8 +180,3 @@ Funqis = {
     end
 }
 return Funqis
-
--- local Window = Funqis.CriarJanelaBase("Super Interface do Niquispiroca",250,500,Color3.new(0.160784, 0.160784, 0.160784))
--- local Janela = Funqis.CriarJanelaFunc(Window,"Royaleeee Altoooooo")
--- local Togg = Funqis.CriarTogg(Janela,"TogExemplo",function (a) print(a) end)
--- local Butt = Funqis.CriarButt(Janela,"Butaozim",function() print("me cricaro") end)
