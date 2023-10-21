@@ -1,3 +1,4 @@
+local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
 local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
 local config = {
     Vambora = false,
@@ -46,7 +47,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
     end
 end)
 
-local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
 local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs",250,500,Color3.new(0.078431, 0.137254, 0.188235))
 local Janela = Uai.CriarJanelaFunc(Window,"Croqs mundinho esquisito")
 local Togg = Uai.CriarTogg(Janela,"Vambora",function (a) config.Vambora = a end)
