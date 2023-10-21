@@ -151,6 +151,7 @@ Funqis = {
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
         JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
+        return TogCont
     end,
     CriarButt = function (JanB,Titulo,afunc)
         local ButtonOnly = Instance.new("TextButton")
@@ -177,6 +178,7 @@ Funqis = {
         end)
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
         JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
+        return ButtonOnly
     end
 }
 return Funqis
