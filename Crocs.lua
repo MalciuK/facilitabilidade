@@ -1,5 +1,7 @@
+local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
 local config = {
-    Vambora = false
+    Vambora = false,
+    delayafk = 500
 }
 local coemeuprot = game.Workspace.Tycoons:GetChildren()
 local menoh = 999999999999999999999999999
@@ -13,6 +15,12 @@ end
 
 game:GetService("RunService").RenderStepped:Connect(function()
     if(config.Vambora)then
+        if(config.delayafk>0)then
+            config.delayafk-=1
+        else
+            config.delayafk=500
+            input.press(Enum.KeyCode.Space)
+        end
         local rebirta = game.ReplicatedStorage.Remotes.Rebirth.AttemptRebirth
         rebirta:FireServer()
         local ostrem = meuprot.Structures:GetChildren()
