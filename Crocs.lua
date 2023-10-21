@@ -37,8 +37,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 break
             end
         end
-        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,acheiporra,0)
-        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,acheiporra,1)
+        if(acheiporra~=nil)then
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,acheiporra,0)
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,acheiporra,1)
+        end
         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,meuprot.ActiveButtons:GetChildren()[1].Collider,0)
         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,meuprot.ActiveButtons:GetChildren()[1].Collider,1)
     end
@@ -48,4 +50,4 @@ local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/f
 local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs",250,500,Color3.new(0.078431, 0.137254, 0.188235))
 local Janela = Uai.CriarJanelaFunc(Window,"Croqs mundinho esquisito")
 local Togg = Uai.CriarTogg(Janela,"Vambora",function (a) config.Vambora = a end)
-local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() config.Vambora = false end)
+local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() config.Vambora = false end)
