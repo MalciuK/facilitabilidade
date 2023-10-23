@@ -26,7 +26,7 @@ local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/f
 local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniquis",250,500,Color3.new(0.078431, 0.078431, 0.188235))
 local Janela = Uai.CriarJanelaFunc(Window,"Cat Feeding Tycoon")
 local Togg = Uai.CriarTogg(Janela,"Auto Feed Gatin",function (a) config.feed = a end)
-local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() end)
+local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() config.feed = a end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
     -- game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = config.feed
