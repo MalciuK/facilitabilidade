@@ -57,7 +57,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
             -- game.Workspace.Especulaador:GetChildren()[1].Size = Vector3.new(disttrue*2,1,disttrue*2)
             if(game.Workspace.Balls:GetChildren()[2].Color.r == 1)then
                 local distanciaminima = 30
-                if(disttrue<=distanciaminima)then
+                if(disttrue<=distanciaminima or (ondeelata-ondeeuto).magnitude<=distanciaminima)then
                     input.press(Enum.KeyCode.F)
                 end
             end
