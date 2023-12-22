@@ -1,6 +1,8 @@
+local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
 local config = {
     puxaboost = false,
-    autoalinhamento = false
+    autoalinhamento = false,
+    autocompra = false
 }
 
 local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
@@ -8,7 +10,9 @@ local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs",250,500,Color3.n
 local Janela = Uai.CriarJanelaFunc(Window,"Trenzinho Fodase")
 local Togg1 = Uai.CriarTogg(Janela,"Puxa Boost",function (a) config.puxaboost = a end)
 local Togg2 = Uai.CriarTogg(Janela,"Alinhar Carrinho",function (a) config.autoalinhamento = a end)
-local ButtCoisoa = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() end)
+local Togg3 = Uai.CriarTogg(Janela,"Spamar \"E\"",function (a) config.autocompra = a end)
+
+local ButtCoisoa = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() config.autoalinhamento=false config.autocompra=false config.puxaboost=false end)
 
 local usbust = game.Workspace.Effects
 game:GetService("RunService").RenderStepped:Connect(function() 
@@ -26,5 +30,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
             local ruma = Vector3.new(0,0,0)
             carrin.Root.Rotation = ruma
         end
+    end
+    if(config.autocompra)then
+        input.press(Enum.KeyCode.E)
     end
 end)
