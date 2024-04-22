@@ -1,0 +1,169 @@
+local input = loadstring(game:HttpGet('https://pastebin.com/raw/dYzQv3d8'))()
+local config = {
+    automani = false,
+    autoevolved = false,
+    autoevolver = false,
+    getcrates = false,
+    autokillKKKK = false
+}
+local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
+local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs",250,500,Color3.new(0.607843, 0.494117, 0.623529))
+local Janela = Uai.CriarJanelaFunc(Window,"Princess Tycoon Cringe")
+local Togg = Uai.CriarTogg(Janela,"Auto Money",function (a) config.automani = a end)
+local Togg = Uai.CriarTogg(Janela,"Auto Evolve Droppers",function (a) config.autoevolved = a end)
+local Togg = Uai.CriarTogg(Janela,"Auto Evolve Resto",function (a) config.autoevolver = a end)
+local Togg = Uai.CriarTogg(Janela,"Get Cratess",function (a) config.getcrates = a end)
+local Togg = Uai.CriarTogg(Janela,"MataTudoKKKK",function (a) config.autokillKKKK = a end)
+local Butt = Uai.CriarButt(Janela,"Quebra Todas As Paredes",function() QuebraParedes() end)
+local Butt = Uai.CriarButt(Janela,"Pegar Todas As Armas",function() PegaArmas() end)
+local Butt = Uai.CriarButt(Janela,"Fechar Janela",function() Window.Parent:Destroy() config.automani=false config.autoevolved=false config.autoevolver=false config.getcrates = false config.autokillKKKK = false end)
+
+function QuebraParedes()
+    local Plots = game.Workspace.Tycoons.Tycoons:GetChildren()
+    for i=1,#Plots do
+        local Itens = Plots[i].PurchasedObjects:GetChildren()
+        for j=1,#Itens do
+            if string.match(Itens[j].Name, "Wall") then
+                Itens[j]:Destroy()
+            end 
+        end
+    end 
+end
+function PegaArmas()
+    local Plots = game.Workspace.Tycoons.Tycoons:GetChildren()
+    for i=1,#Plots do
+        local Itens = Plots[i].PurchasedObjects:GetChildren()
+        for j=1,#Itens do
+            if string.find(Itens[j].Name, "Giver") then
+                local aarma = Itens[j].Giver
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,aarma,0)
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,aarma,1)
+            end 
+        end
+    end 
+end
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if(config.autokillKKKK)then
+        local Playerss = game.Players:GetChildren()
+        for i=1,#Playerss do
+            if not(Playerss[i].Name=="Noxtnox")then
+                local corpoc = Playerss[i].Character
+                if not (corpoc==nil)then
+                    local corpo = corpoc:WaitForChild("HumanoidRootPart",1)
+                    if(corpo)then
+                        local eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        local futuro = eu.CFrame+Vector3.new(0,100,0)
+                        corpo.CFrame = futuro
+                        local meustrem = game.Players.LocalPlayer.Character:GetChildren()
+                        for j=1,#meustrem do
+                            if (meustrem[j].ClassName == "Tool")then
+                                meustrem[j].Handle.Position = eu.Position+Vector3.new(0,100,0)
+                            end
+                        end 
+                    end
+                end
+            end
+        end
+    end
+    if(config.automani)then
+        local Plots = game.Workspace.Tycoons.Tycoons:GetChildren()
+        for i=1,#Plots do
+            local owneer = Plots[i]:WaitForChild("Owner",1).Value
+            if not (owneer==nil) then
+                if(owneer.Name == game.Players.LocalPlayer.Name) then
+                    local PegaoMani = Plots[i].Essentials.Giver
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,PegaoMani,0)
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,PegaoMani,1)
+                end
+            end
+        end 
+    end
+    if(config.getcrates)then
+        local Crates = game.Workspace.CrateParent:GetChildren()
+        for i=1,#Crates do
+            local Crate = Crates[i]
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Crate,0)
+            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Crate,1)
+        end 
+    end
+    if(config.autoevolved)then
+        local Plots = game.Workspace.Tycoons.Tycoons:GetChildren()
+        for i=1,#Plots do
+            local owneer = Plots[i]:WaitForChild("Owner",1)
+            if not (owneer==nil) then
+                owneer = owneer.Value
+                if not (owneer==nil) then
+                    if(owneer.Name == game.Players.LocalPlayer.Name) then
+                        local Comprass = Plots[i].Buttons:GetChildren()
+                        for j=1, #Comprass do
+                            if(string.find(Comprass[j].Name,"💎") and (string.find(Comprass[j].Name,"Dropper") or string.find(Comprass[j].Name,"Upgrader")))then
+                                if(Comprass[j]:WaitForChild("Head",1))then
+                                    if(Comprass[j].Head.Transparency==0) then
+                                        local Precin = Comprass[j]:WaitForChild("Price",1)
+                                        local Meudindin = string.split(game.Players.LocalPlayer.Character.Head.CashAmmount.Frame.TextLabel.Text," ")[2]
+                                        if(string.find(Meudindin,"K"))then
+                                            Meudindin = tonumber(string.split(Meudindin,"K")[1])*1000
+                                        end
+                                        if(string.find(Meudindin,"M"))then
+                                            Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000
+                                        end
+                                        if(string.find(Meudindin,"B"))then
+                                            Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000000
+                                        end
+                                        if(string.find(Meudindin,"T"))then
+                                            Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000000000
+                                        end
+                                        if not (tonumber(Precin.Value)>tonumber(Meudindin)) then
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Comprass[j].Head,0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Comprass[j].Head,1)
+                                        end
+
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end 
+    end
+    if(config.autoevolver)then
+        local Plots = game.Workspace.Tycoons.Tycoons:GetChildren()
+        for i=1,#Plots do
+            local owneer = Plots[i]:WaitForChild("Owner",1).Value
+            if not (owneer==nil) then
+                if(owneer.Name == game.Players.LocalPlayer.Name) then
+                    local Comprass = Plots[i].Buttons:GetChildren()
+                    for j=1, #Comprass do
+                        if(string.find(Comprass[j].Name,"💎") and not(string.find(Comprass[j].Name,"Dropper") or string.find(Comprass[j].Name,"Upgrader")))then
+                            if(Comprass[j]:WaitForChild("Head",1))then
+                                if(Comprass[j].Head.Transparency==0) then
+                                    local Precin = Comprass[j]:WaitForChild("Price",1)
+                                    local Meudindin = string.split(game.Players.LocalPlayer.Character.Head.CashAmmount.Frame.TextLabel.Text," ")[2]
+                                    if(string.find(Meudindin,"K"))then
+                                        Meudindin = tonumber(string.split(Meudindin,"K")[1])*1000
+                                    end
+                                    if(string.find(Meudindin,"M"))then
+                                        Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000
+                                    end
+                                    if(string.find(Meudindin,"B"))then
+                                        Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000000
+                                    end
+                                    if(string.find(Meudindin,"T"))then
+                                        Meudindin = tonumber(string.split(Meudindin,"M")[1])*1000000000000
+                                    end
+                                    if not (tonumber(Precin.Value)>tonumber(Meudindin)) then
+                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Comprass[j].Head,0)
+                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,Comprass[j].Head,1)
+                                    end
+
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end 
+    end
+end)
