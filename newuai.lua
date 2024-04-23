@@ -1,17 +1,21 @@
+local ContextActionService = game:GetService("ContextActionService")
+local drops = {}
 Funqis = {
     CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario)
-        Altura = 70
+        Altura = 68
         local h = Instance.new("ScreenGui")
         local Main = Instance.new("ImageLabel")
         local Top = Instance.new("Frame")
         local Title = Instance.new("TextLabel")
+        -- local ButtonExtraOptions = Instance.new("TextButton")
+        -- local MainExtra = Instance.new("ImageLabel")
 
         local modpertom = 8/255
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
         local TomTerciario = Color3.new(TomSecundario.R+modpertom,TomSecundario.G+modpertom,TomSecundario.B+modpertom)
 
         h.Name = "NixtiscriptEsteveAquiiiUwU"
-        h.Parent = game:GetService("CoreGui")
+        h.Parent = game:GetService("CoreGui") 
         h.ResetOnSpawn = false
 
         Main.Name = "Main"
@@ -24,6 +28,14 @@ Funqis = {
         Main.Position = UDim2.new(0, 0, 0, 0)
         Main.Size = UDim2.new(0, Largura, 0, Altura)
 
+        -- MainExtra.Name = "MainExtra"
+        -- MainExtra.Parent = h
+        -- MainExtra.Active = true
+        -- MainExtra.Draggable = false
+        -- MainExtra.BackgroundTransparency = 1
+        -- MainExtra.Position = UDim2.new(0, 0, 0, 0)
+        -- MainExtra.Size = UDim2.new(0, Largura, 0, Altura)
+
         Top.Name = "TituloContainer"
         Top.Parent = Main
         Top.BackgroundColor3 = TomPrimario
@@ -31,18 +43,36 @@ Funqis = {
         Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
         Top.Position = UDim2.new(0, 0, 0, 0)
         Top.Size = UDim2.new(0, Largura, 0, 25)    
+
+        -- ButtonExtraOptions.Name = "Extras"
+        -- ButtonExtraOptions.Text = "+"
+        -- ButtonExtraOptions.Parent = Top
+        -- ButtonExtraOptions.BackgroundColor3 = TomPrimario
+        -- ButtonExtraOptions.BorderSizePixel = 1
+        -- ButtonExtraOptions.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        -- ButtonExtraOptions.Position = UDim2.new(0, 0, 0, 0)
+        -- ButtonExtraOptions.Size = UDim2.new(0, 25, 0, 25)   
+        -- ButtonExtraOptions.TextColor3 = Color3.fromRGB(255, 255, 255)
+        -- ButtonExtraOptions.Font = Enum.Font.GothamSemibold
+        -- ButtonExtraOptions.TextSize = 14.000
+        -- ButtonExtraOptions.TextWrapped = true
         
         Title.Name = "Titulorr"
         Title.Parent = Top
         Title.BackgroundColor3 = TomPrimario
         Title.BorderSizePixel = 0
-        Title.Position = UDim2.new(0, 0, 0, 0)
-        Title.Size = UDim2.new(0, Largura, 0, 25)
+        Title.Position = UDim2.new(0, 25, 0, 0)
+        Title.Size = UDim2.new(0, Largura-25, 0, 25)
         Title.Font = Enum.Font.GothamSemibold
         Title.Text = Titulo
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
         Title.TextSize = 14.000
         Title.TextWrapped = true
+
+        -- ButtonExtraOptions.MouseButton1Click:Connect(function()
+        --     afunc()
+        -- end)
+        
         return Main
     end,
     CriarJanelaFunc = function (WinB,Titulo)
@@ -61,7 +91,7 @@ Funqis = {
         ContainerJanela.BorderSizePixel = 1
         ContainerJanela.BorderColor3 = Color3.fromRGB(10, 10, 10)
         ContainerJanela.Position = UDim2.new(0, 6, 0, 32)
-        ContainerJanela.Size = UDim2.new(0, Largura-12, 0, 25+6)
+        ContainerJanela.Size = UDim2.new(0, Largura-12, 0, 25+5)
         
         TopContainerJanela.Name = "TituloContainerJanela"
         TopContainerJanela.Parent = ContainerJanela
@@ -99,12 +129,29 @@ Funqis = {
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
         local TomSextenario = Color3.new(TomPrimario.R+(modpertom*5),TomPrimario.G+(modpertom*5),TomPrimario.B+(modpertom*5))
 
+        local Parentes = JanB:GetChildren()
+        local PosMod = 0
+        local lastcomp = 29
+        for i=1,#Parentes do
+            if(Parentes[i].Name=="ButCont")then
+                PosMod+=25+2+4
+                lastcomp = 25+2+4
+            end
+            if(Parentes[i].Name=="TogCont")then
+                PosMod+=25+4
+                lastcomp = 25+4
+            end
+            if(Parentes[i].Name=="DropCont" or Parentes[i].Name=="SliderCont")then
+                PosMod+=40+4
+                lastcomp = 40+4
+            end
+        end
         TogCont.Name = "TogCont"
         TogCont.Parent = JanB
         TogCont.BackgroundColor3 = TomSecundario
         TogCont.BorderSizePixel = 0
-        TogCont.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31))
-        TogCont.Size = UDim2.new(0, Largura-22, 0, 25)
+        TogCont.Position = UDim2.new(0, 4, 0, 30+PosMod)
+        TogCont.Size = UDim2.new(0, Largura-20, 0, 25)
         TogCont.Text = ""
         TogCont.AutoButtonColor = false
 
@@ -149,9 +196,8 @@ Funqis = {
         TogTitle.TextWrapped = true
         TogTitle.TextXAlignment = Enum.TextXAlignment.Left
 
-        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
-        return TogCont
+        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-29))
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-29))
     end,
     CriarButt = function (JanB,Titulo,afunc)
         local ButtonOnly = Instance.new("TextButton")
@@ -161,10 +207,28 @@ Funqis = {
         local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
 
-        ButtonOnly.Name = "Matador"
+        local Parentes = JanB:GetChildren()
+        local PosMod = 0
+        local lastcomp = 29
+        for i=1,#Parentes do
+            if(Parentes[i].Name=="ButCont")then
+                PosMod+=25+2+4
+                lastcomp = 25+2+4
+            end
+            if(Parentes[i].Name=="TogCont")then
+                PosMod+=25+4
+                lastcomp = 25+4
+            end
+            if(Parentes[i].Name=="DropCont" or Parentes[i].Name=="SliderCont")then
+                PosMod+=40+4
+                lastcomp = 40+4
+            end
+        end
+        ButtonOnly.Name = "ButCont"
         ButtonOnly.Parent = JanB
         ButtonOnly.BackgroundColor3 = TomQuaternario
-        ButtonOnly.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31)+1)
+        ButtonOnly.Position = UDim2.new(0, 5, 0, 31+PosMod)
+        -- ButtonOnly.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31)+1)
         ButtonOnly.Size = UDim2.new(0, Largura-22, 0, 25)
         ButtonOnly.BorderSizePixel = 1
         ButtonOnly.BorderColor3 = Color3.fromRGB(20,20,20)
@@ -176,9 +240,249 @@ Funqis = {
         ButtonOnly.MouseButton1Click:Connect(function()
             afunc()
         end)
-        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
-        return ButtonOnly
+        
+        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp+(31-lastcomp))
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp+(31-lastcomp))
+        -- JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
+        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
+    end,
+    CriarDrop = function (JanB,Titulo,ValorP,Conteudo,afunc)
+        table.insert(drops, Conteudo)
+        local Largura = JanB.Parent.Size.Width.Offset
+        local modpertom = 8/255
+        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local TomTerciario = Color3.new(TomPrimario.R+(modpertom*2),TomPrimario.G+(modpertom*2),TomPrimario.B+(modpertom*2))
+        local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
+        local TomSextenario = Color3.new(TomPrimario.R+(modpertom*5),TomPrimario.G+(modpertom*5),TomPrimario.B+(modpertom*5))
+
+        local Parentes = JanB:GetChildren()
+        local PosMod = 0
+        local lastcomp = 44
+        for i=1,#Parentes do
+            if(Parentes[i].Name=="ButCont")then
+                PosMod+=25+2+4
+                lastcomp = 25+2+4
+            end
+            if(Parentes[i].Name=="TogCont")then
+                PosMod+=25+4
+                lastcomp = 25+4
+            end
+            if(Parentes[i].Name=="DropCont" or Parentes[i].Name=="SliderCont")then
+                PosMod+=40+4
+                lastcomp = 40+4
+            end
+        end
+        local DropCont = Instance.new("Frame")
+        DropCont.Name = "DropCont"
+        DropCont.Parent = JanB
+        DropCont.BorderSizePixel = 0
+        DropCont.BackgroundColor3 = TomSecundario
+        DropCont.Position = UDim2.new(0,4,0,30+PosMod)
+        DropCont.Size = UDim2.new(0,Largura-20,0,40)
+        
+        local DropTit = Instance.new("TextLabel")
+        DropTit.Name = "DropTit"
+        DropTit.Parent = DropCont
+        DropTit.BorderSizePixel = 0
+        DropTit.BackgroundColor3 = TomSecundario
+        DropTit.Position = UDim2.new(0,0,0,0)
+        DropTit.Size = UDim2.new(0,Largura-22,0,14)
+        DropTit.Font = Enum.Font.GothamSemibold
+        DropTit.Text = Titulo
+        DropTit.TextColor3 = Color3.fromRGB(255, 255, 255)
+        DropTit.TextSize = 14.000
+        DropTit.TextWrapped = true
+        DropTit.TextXAlignment = Enum.TextXAlignment.Left
+        
+        local BoxSelect = Instance.new("TextButton")
+        BoxSelect.Name = "BoxSelect"
+        BoxSelect.Parent = DropCont
+        BoxSelect.BorderSizePixel = 1
+        BoxSelect.BorderColor3 = Color3.fromRGB(20,20,20)
+        BoxSelect.BackgroundColor3 = TomQuaternario
+        BoxSelect.Position = UDim2.new(0,1,0,40-22-1)
+        BoxSelect.Size = UDim2.new(0,Largura-22,0,22)
+        BoxSelect.Text = "   "..ValorP
+        BoxSelect.TextColor3 = Color3.fromRGB(255, 255, 255)
+        BoxSelect.TextSize = 14.000
+        BoxSelect.TextWrapped = true
+        BoxSelect.Font = Enum.Font.GothamSemibold
+        BoxSelect.TextXAlignment = Enum.TextXAlignment.Left
+        BoxSelect.TextYAlignment = Enum.TextYAlignment.Center
+        
+
+        local EnfeiteSeta = Instance.new("TextLabel")
+        EnfeiteSeta.Name = "EnfeiteSeta"
+        EnfeiteSeta.Parent = BoxSelect
+        EnfeiteSeta.BorderSizePixel = 0
+        EnfeiteSeta.BackgroundColor3 = TomQuaternario
+        EnfeiteSeta.Position = UDim2.new(0,Largura-44,0,0)
+        EnfeiteSeta.Size = UDim2.new(0,22,0,22)
+        EnfeiteSeta.Font = Enum.Font.GothamSemibold
+        EnfeiteSeta.Text = "↓"
+        EnfeiteSeta.TextColor3 = TomSextenario
+        EnfeiteSeta.TextSize = 14.000
+        EnfeiteSeta.TextScaled = true
+
+        local PosS = Instance.new("IntValue")
+        PosS.Name = "Pos"
+        PosS.Parent = DropCont
+        PosS.Value = #drops
+
+        BoxSelect.MouseButton1Click:Connect(function()
+            local mostraostremmovel = BoxSelect:FindFirstChild("MostranoMovel")
+            if (mostraostremmovel==nil)then
+                local mostraostremmovel = Instance.new("ScrollingFrame")
+                mostraostremmovel.Name = "MostranoMovel"
+                mostraostremmovel.Parent = BoxSelect
+                mostraostremmovel.BackgroundColor3 = TomTerciario
+                mostraostremmovel.ScrollBarThickness = 0
+                mostraostremmovel.BorderSizePixel=1
+                mostraostremmovel.BorderColor3 = Color3.fromRGB(20,20,20)
+                mostraostremmovel.Position = UDim2.new(0,0,0,22+2)
+                mostraostremmovel.Size = UDim2.new(0,Largura-22,0,10*4)
+                mostraostremmovel.ZIndex = 100
+    
+                local ostrem = drops[PosS.Value]
+                for i=1,#ostrem do
+                    local opcom = Instance.new("TextButton")
+                    opcom.Name = "ButCont"
+                    opcom.Parent = mostraostremmovel
+                    opcom.BackgroundColor3 = TomQuaternario
+                    opcom.Position = UDim2.new(0, 1, 0,1+(i-1)*11)
+                    opcom.Size = UDim2.new(0, Largura-22-2, 0, 10)
+                    opcom.BorderSizePixel = 1
+                    opcom.BorderColor3 = Color3.fromRGB(20,20,20)
+                    opcom.Text = ostrem[i]
+                    opcom.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    opcom.Font = Enum.Font.GothamSemibold
+                    opcom.TextSize = 10.000
+                    opcom.TextWrapped = true
+                    opcom.ZIndex = 101
+                    opcom.MouseButton1Click:Connect(function()
+                        afunc(ostrem[i])
+                        mostraostremmovel.Parent.Text = "   "..ostrem[i]
+                        mostraostremmovel:Destroy()
+                    end)
+                end
+            else
+                mostraostremmovel:Destroy()
+            end
+        end)
+        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
+    end,
+    CriarSlider = function (JanB,Titulo,ValorP,Min,Max,afunc)
+        local Largura = JanB.Parent.Size.Width.Offset
+        local modpertom = 8/255
+        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local TomTerciario = Color3.new(TomPrimario.R+(modpertom*2),TomPrimario.G+(modpertom*2),TomPrimario.B+(modpertom*2))
+        local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
+        local TomQuintenario = Color3.new(TomPrimario.R+(modpertom*4),TomPrimario.G+(modpertom*4),TomPrimario.B+(modpertom*4))
+        local TomSextenario = Color3.new(TomPrimario.R+(modpertom*5),TomPrimario.G+(modpertom*5),TomPrimario.B+(modpertom*5))
+
+        local Parentes = JanB:GetChildren()
+        local PosMod = 0
+        local lastcomp = 44
+        for i=1,#Parentes do
+            if(Parentes[i].Name=="ButCont")then
+                PosMod+=25+2+4
+                lastcomp = 25+2+4
+            end
+            if(Parentes[i].Name=="TogCont")then
+                PosMod+=25+4
+                lastcomp = 25+4
+            end
+            if(Parentes[i].Name=="DropCont" or Parentes[i].Name=="SliderCont")then
+                PosMod+=40+4
+                lastcomp = 40+4
+            end
+        end
+        local SliderCont = Instance.new("Frame")
+        SliderCont.Name = "SliderCont"
+        SliderCont.Parent = JanB
+        SliderCont.BorderSizePixel = 0
+        SliderCont.BackgroundColor3 = TomSecundario
+        SliderCont.Position = UDim2.new(0,4,0,30+PosMod)
+        SliderCont.Size = UDim2.new(0,Largura-20,0,40)
+        
+        local SliderTit = Instance.new("TextLabel")
+        SliderTit.Name = "SliderTit"
+        SliderTit.Parent = SliderCont
+        SliderTit.BorderSizePixel = 0
+        SliderTit.BackgroundColor3 = TomSecundario
+        SliderTit.Position = UDim2.new(0,0,0,0)
+        SliderTit.Size = UDim2.new(0,Largura-22,0,14)
+        SliderTit.Font = Enum.Font.GothamSemibold
+        SliderTit.Text = Titulo
+        SliderTit.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SliderTit.TextSize = 14.000
+        SliderTit.TextWrapped = true
+        SliderTit.TextXAlignment = Enum.TextXAlignment.Left
+        
+        local Slider = Instance.new("Frame")
+        Slider.Name = "Slider"
+        Slider.Parent = SliderCont
+        Slider.BorderSizePixel = 0
+        Slider.BackgroundColor3 = TomSecundario
+        Slider.Position = UDim2.new(0,1,0,40-22-1)
+        Slider.Size = UDim2.new(0,Largura-22,0,22)
+
+        local SliderBar = Instance.new("Frame")
+        SliderBar.Name = "SliderBar"
+        SliderBar.Parent = Slider
+        SliderBar.BorderSizePixel = 0
+        SliderBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SliderBar.BackgroundTransparency = 0.3
+        SliderBar.Position = UDim2.new(0,8,0,11-3)
+        SliderBar.Size = UDim2.new(0,Largura-22-16,0,8)
+        local redondar = Instance.new('UICorner')
+        redondar.Name = "ArredondaSaporra"
+        redondar.Parent = SliderBar
+
+        local SliderBarPreenchido = Instance.new("Frame")
+        SliderBarPreenchido.Name = "SliderBar"
+        SliderBarPreenchido.Parent = SliderBar
+        SliderBarPreenchido.BorderSizePixel = 0
+        SliderBarPreenchido.BackgroundColor3 = TomQuintenario
+        SliderBarPreenchido.Position = UDim2.new(0,0,0,0)
+        SliderBarPreenchido.Size = UDim2.new(0,0,0,8)
+        local redondar2 = Instance.new('UICorner')
+        redondar2.Name = "ArredondaSaporra"
+        redondar2.Parent = SliderBarPreenchido
+        
+        local SliderHandle = Instance.new("TextButton")
+        SliderHandle.Name = "SliderHandle"
+        SliderHandle.Text = ""
+        SliderHandle.Parent = SliderBar
+        SliderHandle.Active = true
+        SliderHandle.Draggable = true
+        SliderHandle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        SliderHandle.BorderSizePixel = 0
+        SliderHandle.BackgroundTransparency = 0.7
+        SliderHandle.Position = UDim2.new(0, -8+(((ValorP-Min)/(Max-Min))*SliderBar.Size.X.Offset), 0, -4)
+        SliderHandle.Size = UDim2.new(0, 16, 0, 16)
+        local redondar3 = Instance.new('UICorner')
+        redondar3.Name = "ArredondaSaporra"
+        redondar3.Parent = SliderHandle
+
+        game:GetService("RunService").RenderStepped:Connect(function()
+            local Move = SliderHandle.Position.X.Offset
+            if(Move<-8) then Move = -8 end
+            if(Move>SliderBar.Size.X.Offset-8) then Move = SliderBar.Size.X.Offset-8 end
+            SliderHandle.Position = UDim2.new(0, Move, 0, -4)
+            SliderBarPreenchido.Size = UDim2.new(0,Move+8,0,8)
+        end)
+        SliderHandle.MouseButton1Up:Connect(function()
+            local PorcentagemSlider = SliderBarPreenchido.Size.X.Offset/SliderBar.Size.X.Offset
+            local ValorRetorno = ((Max-Min)*PorcentagemSlider)+Min
+            afunc(ValorRetorno,PorcentagemSlider)
+        end)
+
+        JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
+        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
     end
 }
 return Funqis
