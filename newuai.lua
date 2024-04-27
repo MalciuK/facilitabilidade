@@ -1,14 +1,89 @@
 local ContextActionService = game:GetService("ContextActionService")
-local drops = {}
+-- local drops = {}
+
+local configsfunextras ={
+    working = true,
+    renderstepped = nil,
+    ragdoll = false,
+    grudado = "None"
+}
+
+function janfuncextras(Window)
+    configsfunextras.working = true
+    configsfunextras.renderstepped = nil
+    configsfunextras.ragdoll = false
+    
+    function getplayersnametable() 
+        local ospreiereturn = {"None"}
+        local ospreie = game.Players:GetChildren()
+        for i=1, #ospreie do
+            table.insert(ospreiereturn,ospreie[i].Name)
+        end
+        return ospreiereturn
+    end
+    function puxatools()
+        function cavuca(currpasta)
+            local cavucano = currpasta:GetChildren()
+            for i=1, #cavucano do
+                if(#cavucano[i]:GetChildren()>0)then --and not cavucano[i].ClassName == "Tool"
+                    cavuca(cavucano[i])
+                end
+                if(cavucano[i].ClassName=="Tool")then
+                    local clone = cavucano[i]:Clone()
+                    clone.Parent = game.Players.LocalPlayer.Backpack
+                end
+            end
+        end
+        local ondepuxar = game
+        cavuca(ondepuxar)
+    end
+    local genericextj = Funqis.CriarJanelaFunc(Window,"Funções Extras Aí Procê")
+    local genericext = Funqis.CriarTogg(genericextj,"Ragdoll",function(a) configsfunextras.ragdoll = a end)
+    genericext = Funqis.CriarSlider(genericextj,"Velocidade %",0,-100,250,function(ValorRetorno,Porcentagem) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16+(16*ValorRetorno/100) end)
+    genericext = Funqis.CriarDrop(genericextj,"Teletransporte","Seleciona pro TP",function() return getplayersnametable() end,function(ken) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(ken).Character.HumanoidRootPart.CFrame end)
+    genericext = Funqis.CriarDrop(genericextj,"Grudar","Seleciona pra grudar",function() return getplayersnametable() end,function(ken) configsfunextras.grudado = ken end)
+    genericext = Funqis.CriarButt(genericextj,"PuxaTools",function() puxatools() end)
+
+    configsfunextras.renderstepped = game:GetService("RunService").RenderStepped:Connect(function() 
+        if(configsfunextras.working)then
+            if(configsfunextras.ragdoll)then
+                local humanoidekkk = game.Players.LocalPlayer.Character.Humanoid
+                if not(humanoidekkk:GetState()==Enum.HumanoidStateType.FallingDown)then
+                    humanoidekkk:ChangeState(Enum.HumanoidStateType.FallingDown)
+                end
+            end
+            if not(configsfunextras.grudado=="None")then
+                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                local Pessoa = game.Players:FindFirstChild(configsfunextras.grudado)
+                if not(Pessoa==nil)then
+                    if not(Pessoa.Character:FindFirstChild("Head")==nil)then
+                        Eu.Anchored=true
+                        Eu.CFrame = Pessoa.Character.Head.CFrame+Vector3.new(0,(Eu.Size.Y)+(Pessoa.Character.Head.Size.Y*2),0)
+                        Eu.Position = Pessoa.Character.Head.Position+Vector3.new(0,(Eu.Size.Y)+(Pessoa.Character.Head.Size.Y*2),0)
+                    end
+                end
+            else
+                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                Eu.Anchored=false
+            end
+        else
+            local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+            Eu.Anchored=false
+            configsfunextras.renderstepped:Disconnect()
+        end
+    end)
+end
+
 Funqis = {
-    CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario)
-        Altura = 68
+    CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario,aclosefunc)
+        -- Altura = 68
         local h = Instance.new("ScreenGui")
         local Main = Instance.new("ImageLabel")
         local Top = Instance.new("Frame")
         local Title = Instance.new("TextLabel")
-        -- local ButtonExtraOptions = Instance.new("TextButton")
-        -- local MainExtra = Instance.new("ImageLabel")
+        local CloseWindowButton = Instance.new("TextButton")
+        local ButtonExtraOptions = Instance.new("TextButton")
+        local ContentWindows = Instance.new("ScrollingFrame")
 
         local modpertom = 8/255
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
@@ -44,34 +119,73 @@ Funqis = {
         Top.Position = UDim2.new(0, 0, 0, 0)
         Top.Size = UDim2.new(0, Largura, 0, 25)    
 
-        -- ButtonExtraOptions.Name = "Extras"
-        -- ButtonExtraOptions.Text = "+"
-        -- ButtonExtraOptions.Parent = Top
-        -- ButtonExtraOptions.BackgroundColor3 = TomPrimario
-        -- ButtonExtraOptions.BorderSizePixel = 1
-        -- ButtonExtraOptions.BorderColor3 = Color3.fromRGB(10, 10, 10)
-        -- ButtonExtraOptions.Position = UDim2.new(0, 0, 0, 0)
-        -- ButtonExtraOptions.Size = UDim2.new(0, 25, 0, 25)   
-        -- ButtonExtraOptions.TextColor3 = Color3.fromRGB(255, 255, 255)
-        -- ButtonExtraOptions.Font = Enum.Font.GothamSemibold
-        -- ButtonExtraOptions.TextSize = 14.000
-        -- ButtonExtraOptions.TextWrapped = true
-        
+
+        ButtonExtraOptions.Name = "Extras"
+        ButtonExtraOptions.Text = "+"
+        ButtonExtraOptions.Parent = Top
+        ButtonExtraOptions.BackgroundColor3 = TomPrimario
+        ButtonExtraOptions.BorderSizePixel = 1
+        ButtonExtraOptions.BorderColor3 = Color3.fromRGB(10, 10, 10)
+        ButtonExtraOptions.Position = UDim2.new(0, 0, 0, 0)
+        ButtonExtraOptions.Size = UDim2.new(0, 25, 0, 25)   
+        ButtonExtraOptions.TextColor3 = Color3.fromRGB(255, 255, 255)
+        ButtonExtraOptions.Font = Enum.Font.GothamSemibold
+        ButtonExtraOptions.TextSize = 14.000
+        ButtonExtraOptions.TextWrapped = true
+
         Title.Name = "Titulorr"
         Title.Parent = Top
         Title.BackgroundColor3 = TomPrimario
         Title.BorderSizePixel = 0
         Title.Position = UDim2.new(0, 25, 0, 0)
-        Title.Size = UDim2.new(0, Largura-25, 0, 25)
+        Title.Size = UDim2.new(0, Largura-50, 0, 25)
         Title.Font = Enum.Font.GothamSemibold
         Title.Text = Titulo
         Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Title.TextSize = 14.000
-        Title.TextWrapped = true
+        Title.TextWrapped = false
+        Title.TextScaled = true
 
-        -- ButtonExtraOptions.MouseButton1Click:Connect(function()
-        --     afunc()
-        -- end)
+        CloseWindowButton.Name = "CloseButton"
+        CloseWindowButton.Text = "X"
+        CloseWindowButton.Parent = Top
+        CloseWindowButton.BackgroundColor3 = TomPrimario
+        CloseWindowButton.BorderSizePixel = 0
+        CloseWindowButton.Position = UDim2.new(0, Largura-25, 0, 0)
+        CloseWindowButton.Size = UDim2.new(0, 25, 0, 25)   
+        CloseWindowButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        CloseWindowButton.Font = Enum.Font.GothamSemibold
+        CloseWindowButton.TextSize = 14.000
+        CloseWindowButton.TextWrapped = true
+        CloseWindowButton.MouseButton1Click:Connect(function()
+            aclosefunc()
+            configsfunextras.working = false
+            Main:Destroy()
+        end)
+
+        ContentWindows.ScrollBarThickness = 0
+        ContentWindows.Name = "ContentWindows"
+        ContentWindows.Parent = Main
+        ContentWindows.BackgroundTransparency = 1
+        ContentWindows.BorderSizePixel = 0
+        ContentWindows.Position = UDim2.new(0, 0, 0, 25)
+        ContentWindows.Size = UDim2.new(0, Largura, 0, Altura-25)
+        ContentWindows.CanvasSize = UDim2.new(0, Largura, 0, 6)
+
+        ButtonExtraOptions.MouseButton1Click:Connect(function()
+            local CheckExtJan = ContentWindows:FindFirstChild("ContainerJanela - Funções Extras Aí Procê")
+            if(CheckExtJan==nil)then
+                janfuncextras(Main)
+            else
+                configsfunextras.working = false
+                CheckExtJan:Destroy()
+                local Childstoresize = ContentWindows:GetChildren()
+                local newheightoffset = 0
+                for i=1,#Childstoresize do
+                    newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+                end
+                ContentWindows.CanvasSize = UDim2.new(0, Largura, 0, newheightoffset+7)
+            end
+        end)
         
         return Main
     end,
@@ -84,13 +198,14 @@ Funqis = {
         local modpertom = 8/255
         local TomPrimario = WinB.TituloContainer.BackgroundColor3
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
+        local Scrolling = WinB:FindFirstChild("ContentWindows")
 
-        ContainerJanela.Name = "ContainerJanela"
-        ContainerJanela.Parent = WinB
+        ContainerJanela.Name = "ContainerJanela - "..Titulo
+        ContainerJanela.Parent = Scrolling
         ContainerJanela.BackgroundColor3 = TomSecundario
         ContainerJanela.BorderSizePixel = 1
         ContainerJanela.BorderColor3 = Color3.fromRGB(10, 10, 10)
-        ContainerJanela.Position = UDim2.new(0, 6, 0, 32)
+        ContainerJanela.Position = UDim2.new(0, 6, 0, Scrolling.CanvasSize.Height.Offset)
         ContainerJanela.Size = UDim2.new(0, Largura-12, 0, 25+5)
         
         TopContainerJanela.Name = "TituloContainerJanela"
@@ -113,6 +228,15 @@ Funqis = {
         TitleJogo.TextSize = 14.000
         TitleJogo.TextWrapped = true
         TitleJogo.TextXAlignment = Enum.TextXAlignment.Left
+
+        -- Scrolling.CanvasSize = UDim2.new(0,Largura,0,Scrolling.CanvasSize.Height.Offset+6+25+5)
+        local Childstoresize = Scrolling:GetChildren()
+        local newheightoffset = 0
+        for i=1,#Childstoresize do
+            newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+        end
+        Scrolling.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
+
         return ContainerJanela
     end,
     CriarTogg = function (JanB,Titulo,afunc)
@@ -124,7 +248,7 @@ Funqis = {
 
         local Largura = JanB.Parent.Size.Width.Offset
         local modpertom = 8/255
-        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomPrimario = JanB.Parent.Parent.TituloContainer.BackgroundColor3
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
         local TomSextenario = Color3.new(TomPrimario.R+(modpertom*5),TomPrimario.G+(modpertom*5),TomPrimario.B+(modpertom*5))
@@ -197,14 +321,21 @@ Funqis = {
         TogTitle.TextXAlignment = Enum.TextXAlignment.Left
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-29))
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-29))
+        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-29))
+        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-29))
+        local Childstoresize = JanB.Parent:GetChildren()
+        local newheightoffset = 0
+        for i=1,#Childstoresize do
+            newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+        end
+        JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
     end,
     CriarButt = function (JanB,Titulo,afunc)
         local ButtonOnly = Instance.new("TextButton")
         
         local Largura = JanB.Parent.Size.Width.Offset
         local modpertom = 8/255
-        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomPrimario = JanB.Parent.Parent.TituloContainer.BackgroundColor3
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
 
         local Parentes = JanB:GetChildren()
@@ -242,15 +373,21 @@ Funqis = {
         end)
         
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp+(31-lastcomp))
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp+(31-lastcomp))
+        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp+(31-lastcomp))
+        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp+(31-lastcomp))
+        local Childstoresize = JanB.Parent:GetChildren()
+        local newheightoffset = 0
+        for i=1,#Childstoresize do
+            newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+        end
+        JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
         -- JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
         -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
     end,
-    CriarDrop = function (JanB,Titulo,ValorP,Conteudo,afunc)
-        table.insert(drops, Conteudo)
+    CriarDrop = function (JanB,Titulo,ValorP,aConteudofunc,afunc)
         local Largura = JanB.Parent.Size.Width.Offset
         local modpertom = 8/255
-        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomPrimario = JanB.Parent.Parent.TituloContainer.BackgroundColor3
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
         local TomTerciario = Color3.new(TomPrimario.R+(modpertom*2),TomPrimario.G+(modpertom*2),TomPrimario.B+(modpertom*2))
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
@@ -325,11 +462,6 @@ Funqis = {
         EnfeiteSeta.TextSize = 14.000
         EnfeiteSeta.TextScaled = true
 
-        local PosS = Instance.new("IntValue")
-        PosS.Name = "Pos"
-        PosS.Parent = DropCont
-        PosS.Value = #drops
-
         BoxSelect.MouseButton1Click:Connect(function()
             local mostraostremmovel = BoxSelect:FindFirstChild("MostranoMovel")
             if (mostraostremmovel==nil)then
@@ -343,14 +475,14 @@ Funqis = {
                 mostraostremmovel.Position = UDim2.new(0,0,0,22+2)
                 mostraostremmovel.Size = UDim2.new(0,Largura-22,0,10*4)
                 mostraostremmovel.ZIndex = 100
-    
-                local ostrem = drops[PosS.Value]
+
+                local ostrem = aConteudofunc()
                 for i=1,#ostrem do
                     local opcom = Instance.new("TextButton")
                     opcom.Name = "ButCont"
                     opcom.Parent = mostraostremmovel
                     opcom.BackgroundColor3 = TomQuaternario
-                    opcom.Position = UDim2.new(0, 1, 0,1+(i-1)*11)
+                    opcom.Position = UDim2.new(0, 1, 0,(i-1)*11)
                     opcom.Size = UDim2.new(0, Largura-22-2, 0, 10)
                     opcom.BorderSizePixel = 1
                     opcom.BorderColor3 = Color3.fromRGB(20,20,20)
@@ -366,17 +498,27 @@ Funqis = {
                         mostraostremmovel:Destroy()
                     end)
                 end
+                
+                mostraostremmovel.CanvasSize = UDim2.new(0,0,0,#ostrem*11)
             else
                 mostraostremmovel:Destroy()
             end
         end)
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
+        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
+        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-44))
+        local Childstoresize = JanB.Parent:GetChildren()
+        local newheightoffset = 0
+        for i=1,#Childstoresize do
+            newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+        end
+        JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
     end,
     CriarSlider = function (JanB,Titulo,ValorP,Min,Max,afunc)
         local Largura = JanB.Parent.Size.Width.Offset
+        local Altura = JanB.Parent.Size.Height.Offset
         local modpertom = 8/255
-        local TomPrimario = JanB.Parent.TituloContainer.BackgroundColor3
+        local TomPrimario = JanB.Parent.Parent.TituloContainer.BackgroundColor3
         local TomSecundario = Color3.new(TomPrimario.R+modpertom,TomPrimario.G+modpertom,TomPrimario.B+modpertom)
         local TomTerciario = Color3.new(TomPrimario.R+(modpertom*2),TomPrimario.G+(modpertom*2),TomPrimario.B+(modpertom*2))
         local TomQuaternario = Color3.new(TomPrimario.R+(modpertom*3),TomPrimario.G+(modpertom*3),TomPrimario.B+(modpertom*3))
@@ -482,7 +624,27 @@ Funqis = {
         end)
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
-        JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
+        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
+        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-44))
+        local Childstoresize = JanB.Parent:GetChildren()
+        local newheightoffset = 0
+        for i=1,#Childstoresize do
+            newheightoffset+=Childstoresize[i].Size.Height.Offset+7
+        end
+        JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
     end
 }
-return Funqis
+-- return Funqis
+
+-- local mata = game:GetService("CoreGui"):GetChildren()
+-- for i=1, #mata do
+--     if(mata[i].Name=="NixtiscriptEsteveAquiiiUwU")then
+--         mata[i]:Destroy()
+--     end
+-- end
+local Window = Funqis.CriarJanelaBase("Super Interface do Niquispiroca",250,275,Color3.new(0.160784, 0.160784, 0.160784),function() print("Fecheei") end)
+-- local Janela = Funqis.CriarJanelaFunc(Window,"TestesFodasTicos")
+-- local Slid = Funqis.CriarSlider(Janela,"Slider Exemplo",0,-10,10,function(ValorRetorno,Porcentagem) print("Valor: "..ValorRetorno.."\nPorcentagem: "..(Porcentagem*100).."%") end)
+-- local Drop = Funqis.CriarDrop(Janela,"Dropinho","Nixtiscript",{"Nixtiscript","Kazufudida"},function(ken) print(ken) end)
+-- local Togg = Funqis.CriarTogg(Janela,"TogExemplo",function(a) print(a) end)
+-- local Butt = Funqis.CriarButt(Janela,"Butaozim",function() print("Clicaro") end)
