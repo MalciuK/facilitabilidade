@@ -1,5 +1,4 @@
 local ContextActionService = game:GetService("ContextActionService")
--- local drops = {}
 
 local configsfunextras ={
     working = true,
@@ -102,14 +101,6 @@ Funqis = {
         Main.BorderColor3 = Color3.fromRGB(10, 10, 10)
         Main.Position = UDim2.new(0, 0, 0, 0)
         Main.Size = UDim2.new(0, Largura, 0, Altura)
-
-        -- MainExtra.Name = "MainExtra"
-        -- MainExtra.Parent = h
-        -- MainExtra.Active = true
-        -- MainExtra.Draggable = false
-        -- MainExtra.BackgroundTransparency = 1
-        -- MainExtra.Position = UDim2.new(0, 0, 0, 0)
-        -- MainExtra.Size = UDim2.new(0, Largura, 0, Altura)
 
         Top.Name = "TituloContainer"
         Top.Parent = Main
@@ -321,8 +312,6 @@ Funqis = {
         TogTitle.TextXAlignment = Enum.TextXAlignment.Left
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-29))
-        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-29))
-        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-29))
         local Childstoresize = JanB.Parent:GetChildren()
         local newheightoffset = 0
         for i=1,#Childstoresize do
@@ -359,7 +348,6 @@ Funqis = {
         ButtonOnly.Parent = JanB
         ButtonOnly.BackgroundColor3 = TomQuaternario
         ButtonOnly.Position = UDim2.new(0, 5, 0, 31+PosMod)
-        -- ButtonOnly.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31)+1)
         ButtonOnly.Size = UDim2.new(0, Largura-22, 0, 25)
         ButtonOnly.BorderSizePixel = 1
         ButtonOnly.BorderColor3 = Color3.fromRGB(20,20,20)
@@ -373,16 +361,12 @@ Funqis = {
         end)
         
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp+(31-lastcomp))
-        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp+(31-lastcomp))
-        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp+(31-lastcomp))
         local Childstoresize = JanB.Parent:GetChildren()
         local newheightoffset = 0
         for i=1,#Childstoresize do
             newheightoffset+=Childstoresize[i].Size.Height.Offset+7
         end
         JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
-        -- JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+31)
-        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+31)
     end,
     CriarDrop = function (JanB,Titulo,ValorP,aConteudofunc,afunc)
         local Largura = JanB.Parent.Size.Width.Offset
@@ -505,8 +489,6 @@ Funqis = {
             end
         end)
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
-        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
-        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-44))
         local Childstoresize = JanB.Parent:GetChildren()
         local newheightoffset = 0
         for i=1,#Childstoresize do
@@ -624,8 +606,6 @@ Funqis = {
         end)
 
         JanB.Size = UDim2.new(0,JanB.Size.Width.Offset,0,JanB.Size.Height.Offset+lastcomp-(lastcomp-44))
-        -- JanB.Parent.Size = UDim2.new(0,JanB.Parent.Size.Width.Offset,0,JanB.Parent.Size.Height.Offset+lastcomp-(lastcomp-44))
-        -- JanB.Parent.CanvasSize = UDim2.new(0,0,0,JanB.Parent.CanvasSize.Height.Offset+lastcomp-(lastcomp-44))
         local Childstoresize = JanB.Parent:GetChildren()
         local newheightoffset = 0
         for i=1,#Childstoresize do
@@ -634,17 +614,3 @@ Funqis = {
         JanB.Parent.CanvasSize = UDim2.new(0,0,0,newheightoffset+7)
     end
 }
--- return Funqis
-
--- local mata = game:GetService("CoreGui"):GetChildren()
--- for i=1, #mata do
---     if(mata[i].Name=="NixtiscriptEsteveAquiiiUwU")then
---         mata[i]:Destroy()
---     end
--- end
-local Window = Funqis.CriarJanelaBase("Super Interface do Niquispiroca",250,275,Color3.new(0.160784, 0.160784, 0.160784),function() print("Fecheei") end)
--- local Janela = Funqis.CriarJanelaFunc(Window,"TestesFodasTicos")
--- local Slid = Funqis.CriarSlider(Janela,"Slider Exemplo",0,-10,10,function(ValorRetorno,Porcentagem) print("Valor: "..ValorRetorno.."\nPorcentagem: "..(Porcentagem*100).."%") end)
--- local Drop = Funqis.CriarDrop(Janela,"Dropinho","Nixtiscript",{"Nixtiscript","Kazufudida"},function(ken) print(ken) end)
--- local Togg = Funqis.CriarTogg(Janela,"TogExemplo",function(a) print(a) end)
--- local Butt = Funqis.CriarButt(Janela,"Butaozim",function() print("Clicaro") end)
