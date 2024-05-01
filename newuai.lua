@@ -4,7 +4,9 @@ local configsfunextras ={
     working = true,
     renderstepped = nil,
     ragdoll = false,
-    grudado = "None"
+    grudado = "None",
+    flipflop = false,
+    rastrear = false
 }
 
 function janfuncextras(Window)
@@ -24,7 +26,7 @@ function janfuncextras(Window)
         function cavuca(currpasta)
             local cavucano = currpasta:GetChildren()
             for i=1, #cavucano do
-                if(#cavucano[i]:GetChildren()>0)then --and not cavucano[i].ClassName == "Tool"
+                if(#cavucano[i]:GetChildren()>0)then 
                     cavuca(cavucano[i])
                 end
                 if(cavucano[i].ClassName=="Tool")then
@@ -38,12 +40,36 @@ function janfuncextras(Window)
     end
     local genericextj = Funqis.CriarJanelaFunc(Window,"Funções Extras Aí Procê")
     local genericext = Funqis.CriarTogg(genericextj,"Ragdoll",function(a) configsfunextras.ragdoll = a end)
+    local genericext = Funqis.CriarTogg(genericextj,"Spinarrr",function(a) configsfunextras.flipflop = a end)
+    local genericext = Funqis.CriarTogg(genericextj,"Rastrear",function(a) configsfunextras.rastrear = a end)
     genericext = Funqis.CriarSlider(genericextj,"Velocidade %",0,-100,250,function(ValorRetorno,Porcentagem) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16+(16*ValorRetorno/100) end)
     genericext = Funqis.CriarDrop(genericextj,"Teletransporte","Seleciona pro TP",function() return getplayersnametable() end,function(ken) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(ken).Character.HumanoidRootPart.CFrame end)
     genericext = Funqis.CriarDrop(genericextj,"Grudar","Seleciona pra grudar",function() return getplayersnametable() end,function(ken) configsfunextras.grudado = ken end)
-    genericext = Funqis.CriarButt(genericextj,"PuxaTools",function() puxatools() end)
 
-    configsfunextras.renderstepped = game:GetService("RunService").RenderStepped:Connect(function() 
+    function tiropeipei(ken)
+        local OPlayerr = game.Players:FindFirstChild(ken)
+        local check = false
+        if not(OPlayerr.Name==game.Players.LocalPlayer.Name or check)then
+            print(OPlayerr.Name)
+            local eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+            local direcao = (OPlayerr.Character.HumanoidRootPart.Position-eu.Position).Unit
+            local forcadotiro = 100000*direcao
+            
+            local att = Instance.new("Attachment",eu)
+            att.Name = "Segura"
+            local vf = Instance.new("VectorForce",eu)
+            vf.Name = "TiroForca"
+            vf.Force = forcadotiro
+            vf.RelativeTo = Enum.ActuatorRelativeTo.World
+            vf.Attachment0 = att
+
+
+            check = true
+        end
+    end
+
+    configsfunextras.renderstepped = game:GetService("RunService").Stepped:Connect(function() 
         if(configsfunextras.working)then
             if(configsfunextras.ragdoll)then
                 local humanoidekkk = game.Players.LocalPlayer.Character.Humanoid
@@ -51,23 +77,185 @@ function janfuncextras(Window)
                     humanoidekkk:ChangeState(Enum.HumanoidStateType.FallingDown)
                 end
             end
+            if(configsfunextras.flipflop) then
+                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                local Velocidade = 45
+                local newrot = CFrame.Angles(math.rad(Velocidade*1/3),math.rad(Velocidade*2/3),math.rad(Velocidade*3/3))
+                Eu.CFrame = Eu.CFrame:ToWorldSpace(newrot)
+            end
+            if(configsfunextras.rastrear) then
+                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                local Jogadores = game.Players:GetChildren()
+                for i=1, #Jogadores do
+                    local Jogador = Jogadores[i].Character
+                    if not(Jogador==nil)then
+                        local JogadorRP = Jogador:FindFirstChild("HumanoidRootPart")
+                        if not(JogadorRP==nil)then
+                            local PastaRastreadores = game.Workspace:FindFirstChild("PastaRastreadoresNix")
+                            if (PastaRastreadores==nil)then
+                                local novapasta = Instance.new("Folder",game.Workspace)
+                                novapasta.Name = "PastaRastreadoresNix"
+                                PastaRastreadores = novapasta
+                            end
+                            
+                            function revelarastreador(pai)
+                                local bgcor = Color3.new(1,0,0)
+                                local transparencia = 0.75
+                                
+                                local novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Back
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                local novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Bottom
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Front
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Left
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Right
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                novorastreadorsg = Instance.new("SurfaceGui",pai)
+                                novorastreadorsg.Face = Enum.NormalId.Top
+                                novorastreadorsg.AlwaysOnTop = true
+                                novorastreadorsg.Name = "RastreadorDeMembroNix"
+                                novorastreadorfr = Instance.new("Frame",novorastreadorsg)
+                                novorastreadorfr.Size = UDim2.new(1,0,1,0)
+                                novorastreadorfr.BackgroundColor3 = bgcor
+                                novorastreadorfr.BackgroundTransparency = transparencia
+                                return pai
+                            end
+                            local ORastreador = PastaRastreadores:FindFirstChild(Jogador.Name)
+                            if(ORastreador==nil)then
+                                local novorastreador = Instance.new("Part",PastaRastreadores)
+                                novorastreador.Anchored = true
+                                novorastreador.CanCollide = false
+                                novorastreador.Transparency=1
+                                novorastreador.Name = Jogador.Name
+                                ORastreador = revelarastreador(novorastreador)
+                            end
+
+
+                            local checkmembro = JogadorRP:FindFirstChild("RastreadorDeMembroNix")
+                            if(checkmembro==nil)then
+                                local Membros = Jogador:GetChildren()
+                                for j=1, #Membros do
+                                    local Membro = Membros[j]
+                                    if((Membro.ClassName=="Part" or Membro.ClassName=="MeshPart"))then
+                                        local segura = revelarastreador(Membro)
+                                    end
+                                end
+                            end
+
+                            local VetorDir = (JogadorRP.Position-Eu.Position)
+                            local PontoMed = Eu.Position+(VetorDir/2)
+                            local Distancia = VetorDir.Magnitude
+
+                            ORastreador.CFrame = CFrame.new(PontoMed,Eu.Position)
+                            ORastreador.Size = Vector3.new(0.5,0.5,Distancia)
+
+
+                        end
+                    end
+                end
+
+                local PastaRastreadores = game.Workspace:FindFirstChild("PastaRastreadoresNix")
+                if not(PastaRastreadores==nil)then
+                    local Rastreadores = PastaRastreadores:GetChildren()
+                    for i=1, #Rastreadores do
+                        local Rastreador = Rastreadores[i]
+                        local Check = game.Players:FindFirstChild(Rastreador.Name)
+                        if(Check==nil)then
+                            Rastreador:Destroy()
+                        end
+                    end
+                end
+            else
+                local PastaRastreadores = game.Workspace:FindFirstChild("PastaRastreadoresNix")
+                if not(PastaRastreadores==nil)then
+                    PastaRastreadores:Destroy()
+                    local playersi = game.Players:GetChildren()
+                    for i=1, #playersi do
+                        local playerc = playersi[i].Character
+                        if not(playerc==nil)then
+                            local membros = playerc:GetChildren()
+                            for j=1, #membros do
+                                local omembro = membros[j]
+                                if((omembro.ClassName=="Part" or omembro.ClassName=="MeshPart") and #omembro:GetChildren()>0)then
+                                    local cavucamais = omembro:GetChildren()
+                                    for k=1, #cavucamais do
+                                        if(cavucamais[k].Name == "RastreadorDeMembroNix")then
+                                            cavucamais[k]:Destroy()
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
             if not(configsfunextras.grudado=="None")then
                 local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
                 local Pessoa = game.Players:FindFirstChild(configsfunextras.grudado)
                 if not(Pessoa==nil)then
                     if not(Pessoa.Character:FindFirstChild("Head")==nil)then
-                        Eu.Anchored=true
-                        Eu.CFrame = Pessoa.Character.Head.CFrame+Vector3.new(0,(Eu.Size.Y)+(Pessoa.Character.Head.Size.Y*2),0)
-                        Eu.Position = Pessoa.Character.Head.Position+Vector3.new(0,(Eu.Size.Y)+(Pessoa.Character.Head.Size.Y*2),0)
+                        Eu.CFrame = (Eu.CFrame + ((Pessoa.Character.Head.Position + Vector3.new(0,(Eu.Size.Y)+(Pessoa.Character.Head.Size.Y*2),0))-Eu.CFrame.Position))
+                        Eu.Velocity = Vector3.new(0,0,0)
                     end
                 end
-            else
-                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
-                Eu.Anchored=false
             end
         else
             local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
             Eu.Anchored=false
+            local PastaRastreadores = game.Workspace:FindFirstChild("PastaRastreadoresNix")
+            if not(PastaRastreadores==nil)then
+                PastaRastreadores:Destroy()
+                local playersi = game.Players:GetChildren()
+                for i=1, #playersi do
+                    local playerc = playersi[i].Character
+                    if not(playerc==nil)then
+                        local membros = playerc:GetChildren()
+                        for j=1, #membros do
+                            local omembro = membros[j]
+                            if((omembro.ClassName=="Part" or omembro.ClassName=="MeshPart") and #omembro:GetChildren()>0)then
+                                local cavucamais = omembro:GetChildren()
+                                for k=1, #cavucamais do
+                                    if(cavucamais[k].Name == "RastreadorDeMembroNix")then
+                                        cavucamais[k]:Destroy()
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
             configsfunextras.renderstepped:Disconnect()
         end
     end)
@@ -220,7 +408,6 @@ Funqis = {
         TitleJogo.TextWrapped = true
         TitleJogo.TextXAlignment = Enum.TextXAlignment.Left
 
-        -- Scrolling.CanvasSize = UDim2.new(0,Largura,0,Scrolling.CanvasSize.Height.Offset+6+25+5)
         local Childstoresize = Scrolling:GetChildren()
         local newheightoffset = 0
         for i=1,#Childstoresize do
@@ -348,6 +535,7 @@ Funqis = {
         ButtonOnly.Parent = JanB
         ButtonOnly.BackgroundColor3 = TomQuaternario
         ButtonOnly.Position = UDim2.new(0, 5, 0, 31+PosMod)
+        -- ButtonOnly.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31)+1)
         ButtonOnly.Size = UDim2.new(0, Largura-22, 0, 25)
         ButtonOnly.BorderSizePixel = 1
         ButtonOnly.BorderColor3 = Color3.fromRGB(20,20,20)
@@ -466,8 +654,8 @@ Funqis = {
                     opcom.Name = "ButCont"
                     opcom.Parent = mostraostremmovel
                     opcom.BackgroundColor3 = TomQuaternario
-                    opcom.Position = UDim2.new(0, 1, 0,(i-1)*11)
-                    opcom.Size = UDim2.new(0, Largura-22-2, 0, 10)
+                    opcom.Position = UDim2.new(0, 1, 0,(i-1)*16)
+                    opcom.Size = UDim2.new(0, Largura-22-2, 0, 15)
                     opcom.BorderSizePixel = 1
                     opcom.BorderColor3 = Color3.fromRGB(20,20,20)
                     opcom.Text = ostrem[i]
@@ -483,7 +671,7 @@ Funqis = {
                     end)
                 end
                 
-                mostraostremmovel.CanvasSize = UDim2.new(0,0,0,#ostrem*11)
+                mostraostremmovel.CanvasSize = UDim2.new(0,0,0,#ostrem*16)
             else
                 mostraostremmovel:Destroy()
             end
