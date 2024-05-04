@@ -26,7 +26,7 @@ function janfuncextras(Window)
         function cavuca(currpasta)
             local cavucano = currpasta:GetChildren()
             for i=1, #cavucano do
-                if(#cavucano[i]:GetChildren()>0)then 
+                if(#cavucano[i]:GetChildren()>0)then
                     cavuca(cavucano[i])
                 end
                 if(cavucano[i].ClassName=="Tool")then
@@ -39,12 +39,61 @@ function janfuncextras(Window)
         cavuca(ondepuxar)
     end
     local genericextj = Funqis.CriarJanelaFunc(Window,"Funções Extras Aí Procê")
+    local genericext = Funqis.CriarDrop(genericextj,"Teletransporte","Seleciona pro TP",function() return getplayersnametable() end,function(ken) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(ken).Character.HumanoidRootPart.CFrame end)
+    local genericext = Funqis.CriarDrop(genericextj,"Grudar","Seleciona pra grudar",function() return getplayersnametable() end,function(ken) configsfunextras.grudado = ken end)
+    local genericext = Funqis.CriarSlider(genericextj,"Velocidade %",0,-100,250,function(ValorRetorno,Porcentagem) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16+(16*ValorRetorno/100) end)
     local genericext = Funqis.CriarTogg(genericextj,"Ragdoll",function(a) configsfunextras.ragdoll = a end)
     local genericext = Funqis.CriarTogg(genericextj,"Spinarrr",function(a) configsfunextras.flipflop = a end)
     local genericext = Funqis.CriarTogg(genericextj,"Rastrear",function(a) configsfunextras.rastrear = a end)
-    genericext = Funqis.CriarSlider(genericextj,"Velocidade %",0,-100,250,function(ValorRetorno,Porcentagem) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16+(16*ValorRetorno/100) end)
-    genericext = Funqis.CriarDrop(genericextj,"Teletransporte","Seleciona pro TP",function() return getplayersnametable() end,function(ken) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players:FindFirstChild(ken).Character.HumanoidRootPart.CFrame end)
-    genericext = Funqis.CriarDrop(genericextj,"Grudar","Seleciona pra grudar",function() return getplayersnametable() end,function(ken) configsfunextras.grudado = ken end)
+    local genericext = Funqis.CriarButt(genericextj,"Remover Texturas",function() matatexturas() end)
+    local genericext = Funqis.CriarButt(genericextj,"Remover Formas",function() mataformas() end)
+
+    function matatexturas()
+        function cavucatexturas(Pai)
+            local Filhos = Pai:GetChildren()
+            for i=1, #Filhos do
+                local Filho = Filhos[i]
+                if(Filho.ClassName == "Texture" or Filho.ClassName == "Decal")then
+                    Filho:Destroy()
+                else
+                    if pcall(function() local checa = Filho["TextureID"] end) then
+                        Filho.TextureID = ""
+                    end
+                    if pcall(function() local checa = Filho["Material"] end) then
+                        Filho.Material = Enum.Material.Plastic
+                    end
+                    if(#Filho:GetChildren()>0)then
+                        cavucatexturas(Filho)
+                    end
+                end
+            end
+            
+        end
+        cavucatexturas(game)
+    end
+    function mataformas()
+        function cavucatexturas(Pai)
+            local Filhos = Pai:GetChildren()
+            for i=1, #Filhos do
+                local Filho = Filhos[i]
+                if(Filho.ClassName == "Texture" or Filho.ClassName == "Decal")then
+                    Filho:Destroy()
+                else
+                    if pcall(function() local checa = Filho["MeshId"] end) then
+                        Filho.MeshId = ""
+                    end
+                    if pcall(function() local checa = Filho["Shape"] end) then
+                        Filho.Shape = 1
+                    end
+                    if(#Filho:GetChildren()>0)then
+                        cavucatexturas(Filho)
+                    end
+                end
+            end
+            
+        end
+        cavucatexturas(game)
+    end
 
     function tiropeipei(ken)
         local OPlayerr = game.Players:FindFirstChild(ken)
@@ -263,7 +312,6 @@ end
 
 Funqis = {
     CriarJanelaBase = function (Titulo,Largura,Altura,TomPrimario,aclosefunc)
-        -- Altura = 68
         local h = Instance.new("ScreenGui")
         local Main = Instance.new("ImageLabel")
         local Top = Instance.new("Frame")
@@ -535,7 +583,6 @@ Funqis = {
         ButtonOnly.Parent = JanB
         ButtonOnly.BackgroundColor3 = TomQuaternario
         ButtonOnly.Position = UDim2.new(0, 5, 0, 31+PosMod)
-        -- ButtonOnly.Position = UDim2.new(0, 5, 0, ((#JanB:GetChildren()-1)*31)+1)
         ButtonOnly.Size = UDim2.new(0, Largura-22, 0, 25)
         ButtonOnly.BorderSizePixel = 1
         ButtonOnly.BorderColor3 = Color3.fromRGB(20,20,20)
