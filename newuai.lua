@@ -6,6 +6,7 @@ local configsfunextras ={
     ragdoll = false,
     grudado = "None",
     flipflop = false,
+    fly = false,
     rastrear = false
 }
 
@@ -26,7 +27,7 @@ function janfuncextras(Window)
         function cavuca(currpasta)
             local cavucano = currpasta:GetChildren()
             for i=1, #cavucano do
-                if(#cavucano[i]:GetChildren()>0)then
+                if(#cavucano[i]:GetChildren()>0)then 
                     cavuca(cavucano[i])
                 end
                 if(cavucano[i].ClassName=="Tool")then
@@ -45,6 +46,7 @@ function janfuncextras(Window)
     local genericext = Funqis.CriarTogg(genericextj,"Ragdoll",function(a) configsfunextras.ragdoll = a end)
     local genericext = Funqis.CriarTogg(genericextj,"Spinarrr",function(a) configsfunextras.flipflop = a end)
     local genericext = Funqis.CriarTogg(genericextj,"Rastrear",function(a) configsfunextras.rastrear = a end)
+    local genericext = Funqis.CriarTogg(genericextj,"FlyCringe",function(a) configsfunextras.fly = a end)
     local genericext = Funqis.CriarButt(genericextj,"Remover Texturas",function() matatexturas() end)
     local genericext = Funqis.CriarButt(genericextj,"Remover Formas",function() mataformas() end)
 
@@ -270,6 +272,42 @@ function janfuncextras(Window)
                     end
                 end
             end
+            if(configsfunextras.fly)then
+                local Eu = game.Players.LocalPlayer.Character
+                if not(Eu==nil)then
+                    Eu = Eu:FindFirstChild("HumanoidRootPart")
+
+                    local flaidomarcin = game.Workspace:FindFirstChild("FlyDoMarcin")
+                    if(flaidomarcin==nil)then
+                        local novoflaidomarcin = Instance.new("Folder",game.Workspace)
+                        novoflaidomarcin.Name = "FlyDoMarcin"
+                        flaidomarcin=novoflaidomarcin
+                    end
+
+                    local PosicaoPlataforma = (Eu.Position-Vector3.new(0,(Eu.Parent:GetExtentsSize().Y/2)+1,0))
+                    local novaplataformadefly = Instance.new("Part",flaidomarcin)
+                    novaplataformadefly.Name = "PlataformaFly"
+                    novaplataformadefly.Anchored = true
+                    novaplataformadefly.Color = Color3.new(1,1,1)
+                    novaplataformadefly.Transparency=0.9
+                    novaplataformadefly.Size = Vector3.new(10,1,10)
+                    novaplataformadefly.CFrame = CFrame.new(PosicaoPlataforma,PosicaoPlataforma+game.Workspace.CurrentCamera.CFrame.LookVector.Unit*10)
+
+                    local tempo = 10
+                    local pramatardepois = nil
+                    pramatardepois = game:GetService("RunService").RenderStepped:Connect(function()
+                        if(tempo>0)then
+                            tempo-=1
+                        else
+                            novaplataformadefly:Destroy()
+                            pramatardepois:Disconnect()
+                        end
+                    end)
+                end
+            else
+                local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
+                Eu.Anchored=false
+            end
             if not(configsfunextras.grudado=="None")then
                 local Eu = game.Players.LocalPlayer.Character.HumanoidRootPart
                 local Pessoa = game.Players:FindFirstChild(configsfunextras.grudado)
@@ -345,7 +383,6 @@ Funqis = {
         Top.BorderColor3 = Color3.fromRGB(10, 10, 10)
         Top.Position = UDim2.new(0, 0, 0, 0)
         Top.Size = UDim2.new(0, Largura, 0, 25)    
-
 
         ButtonExtraOptions.Name = "Extras"
         ButtonExtraOptions.Text = "+"
