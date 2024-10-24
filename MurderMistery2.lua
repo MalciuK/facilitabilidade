@@ -193,7 +193,7 @@ config.render = game:GetService("RunService").RenderStepped:Connect(function()
                         input.press(Enum.KeyCode.Space)
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position,game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,-1,0))
                         game.Players.LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = Vector3.zero
-                        if(vecDir.Magnitude<1)then
+                        if(vecDir.Magnitude<0.5)then
                             ClosestMoeda:Destroy()
                         end
                     else
