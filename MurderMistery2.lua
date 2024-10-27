@@ -7,7 +7,8 @@ local config = {
     render = false,
     vaipegano2 = false,
     topegano = false,
-    oldg = game.Workspace.Gravity
+    oldg = game.Workspace.Gravity,
+    tentativa = 3
 }
 local Uai = loadstring(game:HttpGet('https://raw.githubusercontent.com/MalciuK/facilitabilidade/main/newuai.lua'))()
 local Window = Uai.CriarJanelaBase("Super Hack do Niquistiniqs",250,250,Color3.new(0.623529, 0.494117, 0.494117),function() config.working=false end)
@@ -184,6 +185,7 @@ config.render = game:GetService("RunService").RenderStepped:Connect(function()
                         end
                     end
                     if not(ClosestMoeda==nil)then
+                        config.tentativa=3
                         AntiColisores(game.Players.LocalPlayer.Character)
                         config.topegano = true
                         game.Workspace.Gravity = 0
@@ -198,9 +200,13 @@ config.render = game:GetService("RunService").RenderStepped:Connect(function()
                         end
                     else
                         if(config.topegano)then
-                            config.topegano=false
-                            game.Workspace.Gravity = config.oldg
-                            game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                            if(config.tentativa<1)then
+                                config.topegano=false
+                                game.Workspace.Gravity = config.oldg
+                                game.Players.LocalPlayer.Character.Humanoid.Health = 0
+                            else
+                                config.tentativa = config.tentativa-1
+                            end
                         end
                     end
                 end
