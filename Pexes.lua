@@ -31,6 +31,7 @@ config.render = game:GetService("RunService").RenderStepped:Connect(function()
                 if not(oagitbotao==nil)then
                     oagitbotao.Position=UDim2.new(0.5,0,0.5,0)
                     game:GetService('VirtualInputManager'):SendMouseButtonEvent(size.X/2,size.Y/2,0,true,nil,0)
+                    task.wait(0.005)
                     game:GetService('VirtualInputManager'):SendMouseButtonEvent(size.X/2,size.Y/2,0,false,nil,0)
                 end
             end
